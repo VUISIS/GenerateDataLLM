@@ -1,0 +1,502 @@
+[
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5525, y = x + 127. C(y) :- A(x), x >= 26, y = x - 1103. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5526) B(5653) C(4423)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 5525 and where x >= 26. The original model has one A(x), and x can be solved with A(5526) B(5653) C(4423)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 2720, y = x + 7869. C(y) :- A(x), x <= 1476, y = x - 8254. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 7869) C(x - 8254)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 2720. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 1476. The original model contains only one A(x), and x cannot be both >= 2720 and <= 1476."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 9480.91, y = x - 6828.26. C(y) :- A(x), x < 1805.6, y = x + 3198.59. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 341413/50) C(x + 319859/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 9480.91. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 1805.6. The original model contains only one A(x), and x cannot be both >= 9480.91 and < 1805.6."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 941.96, y = x - 7424.32. C(y) :- A(x), x > 2102.61, y = x + 1982.21. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 185608/25) C(x + 198221/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 941.96. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 2102.61. The original model contains only one A(x), and x cannot be both <= 941.96 and > 2102.61."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3762.7, y = x + 555.76. C(y) :- A(x), x <= 1091.9, y = x - 2111.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 13894/25) C(x - 42229/20)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3762.7. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 1091.9. The original model contains only one A(x), and x cannot be both > 3762.7 and <= 1091.9."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 7091.25, y = x - 9158.68. C(y) :- A(x), x <= 8284.55, y = x + 1375.7. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(28365/4) B(-206743/100) C(169339/20)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 7091.25 and where x <= 8284.55. The original model has one A(x), and x can be solved with A(28365/4) B(-206743/100) C(169339/20)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 8248, y = x + 4735. C(y) :- A(x), x <= 2848, y = x - 7482. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 4735) C(x - 7482)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 8248. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2848. The original model contains only one A(x), and x cannot be both >= 8248 and <= 2848."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 942.41, y = x - 585.37. C(y) :- A(x), x < 6783.82, y = x + 2189.88. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(94241/100) B(8926/25) C(313229/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 942.41 and where x < 6783.82. The original model has one A(x), and x can be solved with A(94241/100) B(8926/25) C(313229/100)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 5807.52, y = x + 2932.67. C(y) :- A(x), x > 8462.67, y = x - 7468.56. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 293267/100) C(x - 186714/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 5807.52. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 8462.67. The original model contains only one A(x), and x cannot be both < 5807.52 and > 8462.67."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 1723, y = x + 736. C(y) :- A(x), x < 5557, y = x - 1709. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1723) B(2459) C(14)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1723 and where x < 5557. The original model has one A(x), and x can be solved with A(1723) B(2459) C(14)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3004.16, y = x - 2585.53. C(y) :- A(x), x < 143.85, y = x + 9063.72. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 258553/100) C(x + 226593/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3004.16. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 143.85. The original model contains only one A(x), and x cannot be both > 3004.16 and < 143.85."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 8870.06, y = x + 9208.45. C(y) :- A(x), x >= 8510.58, y = x - 3190.36. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(425529/50) B(1771903/100) C(266011/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8870.06 and where x >= 8510.58. The original model has one A(x), and x can be solved with A(425529/50) B(1771903/100) C(266011/50)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8714, y = x + 2361. C(y) :- A(x), x <= 481, y = x - 9261. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(2361) C(-9261)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 8714 and where x <= 481. The original model has one A(x), and x can be solved with A(0) B(2361) C(-9261)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5403.59, y = x + 6141.21. C(y) :- A(x), x >= 1890.46, y = x - 186.68. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(94523/50) B(803167/100) C(85189/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5403.59 and where x >= 1890.46. The original model has one A(x), and x can be solved with A(94523/50) B(803167/100) C(85189/50)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6604, y = x - 6560. C(y) :- A(x), x <= 4270, y = x + 6221. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-6560) C(6221)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 6604 and where x <= 4270. The original model has one A(x), and x can be solved with A(0) B(-6560) C(6221)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 9660, y = x - 5417. C(y) :- A(x), x < 5711, y = x + 376. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5417) C(x + 376)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 9660. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 5711. The original model contains only one A(x), and x cannot be both >= 9660 and < 5711."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 891, y = x + 3891. C(y) :- A(x), x > 1256, y = x - 1859. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 3891) C(x - 1859)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 891. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 1256. The original model contains only one A(x), and x cannot be both < 891 and > 1256."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 3556, y = x - 7803. C(y) :- A(x), x >= 2238, y = x + 1812. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2238) B(-5565) C(4050)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 3556 and where x >= 2238. The original model has one A(x), and x can be solved with A(2238) B(-5565) C(4050)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1232, y = x + 2671. C(y) :- A(x), x >= 5152, y = x - 3832. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 2671) C(x - 3832)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 1232. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 5152. The original model contains only one A(x), and x cannot be both < 1232 and >= 5152."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 6250.34, y = x - 5048.94. C(y) :- A(x), x < 6977.46, y = x + 222.19. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(312517/50) B(6007/5) C(647253/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 6250.34 and where x < 6977.46. The original model has one A(x), and x can be solved with A(312517/50) B(6007/5) C(647253/100)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 1700.12, y = x - 3796.41. C(y) :- A(x), x >= 6085.62, y = x + 5061.08. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 379641/100) C(x + 126527/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1700.12. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6085.62. The original model contains only one A(x), and x cannot be both <= 1700.12 and >= 6085.62."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 6456.82, y = x - 2331.53. C(y) :- A(x), x > 4395.51, y = x + 466.65. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(439651/100) B(103249/50) C(121579/25)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 6456.82 and where x > 4395.51. The original model has one A(x), and x can be solved with A(439651/100) B(103249/50) C(121579/25)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 9666.58, y = x - 917.85. C(y) :- A(x), x <= 9872.0, y = x + 5954.0. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(483379/50) B(874973/100) C(781079/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 9666.58 and where x <= 9872.0. The original model has one A(x), and x can be solved with A(483379/50) B(874973/100) C(781079/50)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 1515.34, y = x - 5525.53. C(y) :- A(x), x <= 3974.47, y = x + 3993.11. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(75767/50) B(-401019/100) C(110169/20)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1515.34 and where x <= 3974.47. The original model has one A(x), and x can be solved with A(75767/50) B(-401019/100) C(110169/20)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 4778, y = x - 9123. C(y) :- A(x), x > 1359, y = x + 1836. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1360) B(-7763) C(3196)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 4778 and where x > 1359. The original model has one A(x), and x can be solved with A(1360) B(-7763) C(3196)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 394.46, y = x + 8230.38. C(y) :- A(x), x >= 2137.77, y = x - 5985.36. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(213777/100) B(207363/20) C(-384759/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 394.46 and where x >= 2137.77. The original model has one A(x), and x can be solved with A(213777/100) B(207363/20) C(-384759/100)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8937, y = x + 695. C(y) :- A(x), x > 7304, y = x - 6042. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(7305) B(8000) C(1263)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8937 and where x > 7304. The original model has one A(x), and x can be solved with A(7305) B(8000) C(1263)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 233.79, y = x - 9123.59. C(y) :- A(x), x >= 1498.37, y = x + 9044.35. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 912359/100) C(x + 180887/20)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 233.79. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 1498.37. The original model contains only one A(x), and x cannot be both <= 233.79 and >= 1498.37."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 9671.6, y = x + 8658.26. C(y) :- A(x), x > 8582.44, y = x - 5509.53. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(214586/25) B(172417/10) C(307391/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 9671.6 and where x > 8582.44. The original model has one A(x), and x can be solved with A(214586/25) B(172417/10) C(307391/100)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 2137.44, y = x - 6821.7. C(y) :- A(x), x >= 8079.34, y = x + 4225.82. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 68217/10) C(x + 211291/50)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 2137.44. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 8079.34. The original model contains only one A(x), and x cannot be both <= 2137.44 and >= 8079.34."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 49, y = x - 5896. C(y) :- A(x), x >= 4303, y = x + 5625. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(4303) B(-1593) C(9928)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 49 and where x >= 4303. The original model has one A(x), and x can be solved with A(4303) B(-1593) C(9928)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 4782, y = x - 7208. C(y) :- A(x), x > 3854, y = x + 3743. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3855) B(-3353) C(7598)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 4782 and where x > 3854. The original model has one A(x), and x can be solved with A(3855) B(-3353) C(7598)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1700, y = x + 8050. C(y) :- A(x), x <= 3137, y = x - 8885. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(8050) C(-8885)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 1700 and where x <= 3137. The original model has one A(x), and x can be solved with A(0) B(8050) C(-8885)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5117.87, y = x - 6312.54. C(y) :- A(x), x >= 6888.79, y = x + 8312.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 315627/50) C(x + 166249/20)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 5117.87. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6888.79. The original model contains only one A(x), and x cannot be both <= 5117.87 and >= 6888.79."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 4590, y = x + 1055. C(y) :- A(x), x >= 644, y = x - 1598. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(644) B(1699) C(-954)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 4590 and where x >= 644. The original model has one A(x), and x can be solved with A(644) B(1699) C(-954)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8628, y = x + 6204. C(y) :- A(x), x <= 932, y = x - 1096. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(6204) C(-1096)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 8628 and where x <= 932. The original model has one A(x), and x can be solved with A(0) B(6204) C(-1096)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 7416.64, y = x + 3588.6. C(y) :- A(x), x < 6183.62, y = x - 5254.71. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 17943/5) C(x - 525471/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 7416.64. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 6183.62. The original model contains only one A(x), and x cannot be both > 7416.64 and < 6183.62."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5771, y = x - 4349. C(y) :- A(x), x >= 2832, y = x + 5619. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5772) B(1423) C(11391)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 5771 and where x >= 2832. The original model has one A(x), and x can be solved with A(5772) B(1423) C(11391)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 2794.3, y = x - 3045.04. C(y) :- A(x), x < 1928.61, y = x + 742.96. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 76126/25) C(x + 18574/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 2794.3. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 1928.61. The original model contains only one A(x), and x cannot be both >= 2794.3 and < 1928.61."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 996.72, y = x + 1699.8. C(y) :- A(x), x > 9898.43, y = x - 9147.43. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 8499/5) C(x - 914743/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 996.72. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9898.43. The original model contains only one A(x), and x cannot be both <= 996.72 and > 9898.43."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 6692.64, y = x + 3387.84. C(y) :- A(x), x < 111.75, y = x - 844.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 84696/25) C(x - 16889/20)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 6692.64. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 111.75. The original model contains only one A(x), and x cannot be both > 6692.64 and < 111.75."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 2028, y = x + 632. C(y) :- A(x), x < 7722, y = x - 5691. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2028) B(2660) C(-3663)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 2028 and where x < 7722. The original model has one A(x), and x can be solved with A(2028) B(2660) C(-3663)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 1972.04, y = x + 23.78. C(y) :- A(x), x > 6605.31, y = x - 9508.73. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 1189/50) C(x - 950873/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1972.04. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 6605.31. The original model contains only one A(x), and x cannot be both <= 1972.04 and > 6605.31."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6938, y = x + 3916. C(y) :- A(x), x <= 9184, y = x - 7327. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(3916) C(-7327)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 6938 and where x <= 9184. The original model has one A(x), and x can be solved with A(0) B(3916) C(-7327)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 7673, y = x + 7959. C(y) :- A(x), x >= 8255, y = x - 4504. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8255) B(16214) C(3751)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 7673 and where x >= 8255. The original model has one A(x), and x can be solved with A(8255) B(16214) C(3751)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5457, y = x - 8561. C(y) :- A(x), x <= 7480, y = x + 3488. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5457) B(-3104) C(8945)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 5457 and where x <= 7480. The original model has one A(x), and x can be solved with A(5457) B(-3104) C(8945)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 7656, y = x - 6092. C(y) :- A(x), x >= 3682, y = x + 7824. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3682) B(-2410) C(11506)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 7656 and where x >= 3682. The original model has one A(x), and x can be solved with A(3682) B(-2410) C(11506)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6733, y = x + 2867. C(y) :- A(x), x >= 4427, y = x - 8742. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(4427) B(7294) C(-4315)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 6733 and where x >= 4427. The original model has one A(x), and x can be solved with A(4427) B(7294) C(-4315)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 8774.75, y = x - 7344.94. C(y) :- A(x), x <= 2767.17, y = x + 6390.66. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 367247/50) C(x + 319533/50)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 8774.75. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2767.17. The original model contains only one A(x), and x cannot be both > 8774.75 and <= 2767.17."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8267, y = x + 3456. C(y) :- A(x), x <= 4413, y = x - 4649. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(3456) C(-4649)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 8267 and where x <= 4413. The original model has one A(x), and x can be solved with A(0) B(3456) C(-4649)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 3703.12, y = x + 9039.66. C(y) :- A(x), x >= 8010.19, y = x - 5544.06. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 451983/50) C(x - 277203/50)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 3703.12. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 8010.19. The original model contains only one A(x), and x cannot be both < 3703.12 and >= 8010.19."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 9791.67, y = x + 6797.14. C(y) :- A(x), x > 6746.31, y = x - 5012.17. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(674731/100) B(270889/20) C(86757/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 9791.67 and where x > 6746.31. The original model has one A(x), and x can be solved with A(674731/100) B(270889/20) C(86757/50)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 1491, y = x - 5317. C(y) :- A(x), x >= 7009, y = x + 3864. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5317) C(x + 3864)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1491. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 7009. The original model contains only one A(x), and x cannot be both <= 1491 and >= 7009."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 864, y = x + 8108. C(y) :- A(x), x > 8369, y = x - 628. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 8108) C(x - 628)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 864. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 8369. The original model contains only one A(x), and x cannot be both < 864 and > 8369."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5752, y = x - 6763. C(y) :- A(x), x <= 8870, y = x + 8275. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5752) B(-1011) C(14027)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 5752 and where x <= 8870. The original model has one A(x), and x can be solved with A(5752) B(-1011) C(14027)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 6202.27, y = x + 3827.03. C(y) :- A(x), x >= 3482.2, y = x - 5111.79. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(620327/100) B(100303/10) C(27287/25)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 6202.27 and where x >= 3482.2. The original model has one A(x), and x can be solved with A(620327/100) B(100303/10) C(27287/25)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3299.82, y = x - 2162.38. C(y) :- A(x), x < 3914.7, y = x + 9438.54. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(165041/50) B(28461/25) C(318484/25)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 3299.82 and where x < 3914.7. The original model has one A(x), and x can be solved with A(165041/50) B(28461/25) C(318484/25)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1883, y = x - 3695. C(y) :- A(x), x > 5945, y = x + 1210. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 3695) C(x + 1210)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 1883. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 5945. The original model contains only one A(x), and x cannot be both < 1883 and > 5945."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 7512.32, y = x + 2085.49. C(y) :- A(x), x >= 4324.31, y = x - 4004.18. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(432431/100) B(32049/5) C(32013/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 7512.32 and where x >= 4324.31. The original model has one A(x), and x can be solved with A(432431/100) B(32049/5) C(32013/100)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 246.41, y = x - 4301.71. C(y) :- A(x), x <= 898.56, y = x + 5111.58. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(24641/100) B(-40553/10) C(535799/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 246.41 and where x <= 898.56. The original model has one A(x), and x can be solved with A(24641/100) B(-40553/10) C(535799/100)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 5199.86, y = x + 3069.67. C(y) :- A(x), x > 9574.97, y = x - 671.96. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 306967/100) C(x - 16799/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 5199.86. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9574.97. The original model contains only one A(x), and x cannot be both < 5199.86 and > 9574.97."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5007, y = x - 2392. C(y) :- A(x), x <= 3935, y = x + 6618. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 2392) C(x + 6618)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 5007. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3935. The original model contains only one A(x), and x cannot be both >= 5007 and <= 3935."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 9850, y = x - 8799. C(y) :- A(x), x >= 9718, y = x + 9076. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(9718) B(919) C(18794)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 9850 and where x >= 9718. The original model has one A(x), and x can be solved with A(9718) B(919) C(18794)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 9073.9, y = x - 7160.39. C(y) :- A(x), x <= 3530.74, y = x + 4652.92. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 716039/100) C(x + 116323/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 9073.9. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3530.74. The original model contains only one A(x), and x cannot be both > 9073.9 and <= 3530.74."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3180.45, y = x - 485.9. C(y) :- A(x), x >= 4027.47, y = x + 9210.39. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(402747/100) B(354157/100) C(661893/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 3180.45 and where x >= 4027.47. The original model has one A(x), and x can be solved with A(402747/100) B(354157/100) C(661893/50)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 4981.32, y = x + 5727.2. C(y) :- A(x), x <= 4120.97, y = x - 380.35. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 28636/5) C(x - 7607/20)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 4981.32. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 4120.97. The original model contains only one A(x), and x cannot be both > 4981.32 and <= 4120.97."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 2377.0, y = x - 9781.62. C(y) :- A(x), x <= 2776.63, y = x + 2530.83. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-489081/50) C(253083/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 2377.0 and where x <= 2776.63. The original model has one A(x), and x can be solved with A(0) B(-489081/50) C(253083/100)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 6870, y = x + 582. C(y) :- A(x), x > 6521, y = x - 9059. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(6522) B(7104) C(-2537)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 6870 and where x > 6521. The original model has one A(x), and x can be solved with A(6522) B(7104) C(-2537)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 7213.35, y = x - 2383.58. C(y) :- A(x), x > 9255.69, y = x + 2877.72. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 119179/50) C(x + 71943/25)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 7213.35. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9255.69. The original model contains only one A(x), and x cannot be both < 7213.35 and > 9255.69."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 7105.76, y = x - 5181.42. C(y) :- A(x), x > 9544.69, y = x + 9444.77. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 259071/50) C(x + 944477/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 7105.76. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9544.69. The original model contains only one A(x), and x cannot be both <= 7105.76 and > 9544.69."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 4256.54, y = x + 1066.79. C(y) :- A(x), x <= 3392.79, y = x - 2036.33. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 106679/100) C(x - 203633/100)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 4256.54. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3392.79. The original model contains only one A(x), and x cannot be both > 4256.54 and <= 3392.79."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 6673, y = x - 5323. C(y) :- A(x), x > 9452, y = x + 5625. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5323) C(x + 5625)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 6673. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9452. The original model contains only one A(x), and x cannot be both <= 6673 and > 9452."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 2510.44, y = x + 2706.93. C(y) :- A(x), x <= 443.43, y = x - 6985.62. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 270693/100) C(x - 349281/50)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 2510.44. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 443.43. The original model contains only one A(x), and x cannot be both > 2510.44 and <= 443.43."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6846, y = x + 2311. C(y) :- A(x), x > 2051, y = x - 404. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2052) B(4363) C(1648)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 6846 and where x > 2051. The original model has one A(x), and x can be solved with A(2052) B(4363) C(1648)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5877.58, y = x + 8863.28. C(y) :- A(x), x >= 4400.43, y = x - 8052.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(440043/100) B(1326371/100) C(-182601/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5877.58 and where x >= 4400.43. The original model has one A(x), and x can be solved with A(440043/100) B(1326371/100) C(-182601/50)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 2709.49, y = x + 6880.29. C(y) :- A(x), x > 2504.85, y = x - 9994.3. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(50117/20) B(469307/50) C(-149769/20)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 2709.49 and where x > 2504.85. The original model has one A(x), and x can be solved with A(50117/20) B(469307/50) C(-149769/20)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 4639, y = x + 4757. C(y) :- A(x), x >= 6424, y = x - 9246. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 4757) C(x - 9246)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 4639. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6424. The original model contains only one A(x), and x cannot be both < 4639 and >= 6424."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 9128, y = x + 4643. C(y) :- A(x), x <= 7178, y = x - 4180. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(4643) C(-4180)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 9128 and where x <= 7178. The original model has one A(x), and x can be solved with A(0) B(4643) C(-4180)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 8818.89, y = x + 8419.85. C(y) :- A(x), x > 9323.64, y = x - 702.25. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 168397/20) C(x - 2809/4)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 8818.89. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9323.64. The original model contains only one A(x), and x cannot be both <= 8818.89 and > 9323.64."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 875, y = x - 486. C(y) :- A(x), x > 9883, y = x + 788. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 486) C(x + 788)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 875. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9883. The original model contains only one A(x), and x cannot be both <= 875 and > 9883."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 1737.2, y = x + 3215.7. C(y) :- A(x), x >= 418.4, y = x - 1677.24. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8691/5) B(49539/10) C(1524/25)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 1737.2 and where x >= 418.4. The original model has one A(x), and x can be solved with A(8691/5) B(49539/10) C(1524/25)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 4499.25, y = x + 9590.66. C(y) :- A(x), x >= 9337.85, y = x - 1863.54. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 479533/50) C(x - 93177/50)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 4499.25. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 9337.85. The original model contains only one A(x), and x cannot be both <= 4499.25 and >= 9337.85."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 791, y = x - 5911. C(y) :- A(x), x < 2473, y = x + 3443. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(791) B(-5120) C(4234)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 791 and where x < 2473. The original model has one A(x), and x can be solved with A(791) B(-5120) C(4234)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5407.7, y = x + 2618.65. C(y) :- A(x), x >= 4003.02, y = x - 6009.64. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(200151/50) B(662167/100) C(-100331/50)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5407.7 and where x >= 4003.02. The original model has one A(x), and x can be solved with A(200151/50) B(662167/100) C(-100331/50)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8324, y = x + 8035. C(y) :- A(x), x > 7557, y = x - 8880. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(7558) B(15593) C(-1322)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8324 and where x > 7557. The original model has one A(x), and x can be solved with A(7558) B(15593) C(-1322)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 2713, y = x + 6929. C(y) :- A(x), x >= 3371, y = x - 3269. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3371) B(10300) C(102)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 2713 and where x >= 3371. The original model has one A(x), and x can be solved with A(3371) B(10300) C(102)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 1152, y = x + 5277. C(y) :- A(x), x < 7790, y = x - 8555. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1152) B(6429) C(-7403)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1152 and where x < 7790. The original model has one A(x), and x can be solved with A(1152) B(6429) C(-7403)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5263, y = x + 4647. C(y) :- A(x), x < 8447, y = x - 6242. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5264) B(9911) C(-978)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 5263 and where x < 8447. The original model has one A(x), and x can be solved with A(5264) B(9911) C(-978)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 6277, y = x + 9472. C(y) :- A(x), x <= 101, y = x - 1886. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 9472) C(x - 1886)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 6277. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 101. The original model contains only one A(x), and x cannot be both > 6277 and <= 101."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 7688.25, y = x + 2992.55. C(y) :- A(x), x < 3537.01, y = x - 119.8. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 59851/20) C(x - 599/5)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 7688.25. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 3537.01. The original model contains only one A(x), and x cannot be both > 7688.25 and < 3537.01."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 3746, y = x + 9473. C(y) :- A(x), x >= 1159, y = x - 4038. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1159) B(10632) C(-2879)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 3746 and where x >= 1159. The original model has one A(x), and x can be solved with A(1159) B(10632) C(-2879)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 9413, y = x + 132. C(y) :- A(x), x > 6512, y = x - 3881. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(6513) B(6645) C(2632)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 9413 and where x > 6512. The original model has one A(x), and x can be solved with A(6513) B(6645) C(2632)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 7856, y = x - 7392. C(y) :- A(x), x <= 4365, y = x + 962. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 7392) C(x + 962)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 7856. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 4365. The original model contains only one A(x), and x cannot be both >= 7856 and <= 4365."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 3782, y = x + 1732. C(y) :- A(x), x <= 2052, y = x - 2876. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 1732) C(x - 2876)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3782. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2052. The original model contains only one A(x), and x cannot be both > 3782 and <= 2052."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 8233, y = x - 6204. C(y) :- A(x), x >= 2764, y = x + 5638. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8234) B(2030) C(13872)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 8233 and where x >= 2764. The original model has one A(x), and x can be solved with A(8234) B(2030) C(13872)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 127.94, y = x - 5250.4. C(y) :- A(x), x <= 9809.21, y = x + 1476.19. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-26252/5) C(147619/100)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x < 127.94 and where x <= 9809.21. The original model has one A(x), and x can be solved with A(0) B(-26252/5) C(147619/100)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 6703, y = x - 9617. C(y) :- A(x), x >= 9386, y = x + 3722. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(9386) B(-231) C(13108)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 6703 and where x >= 9386. The original model has one A(x), and x can be solved with A(9386) B(-231) C(13108)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 2811, y = x - 6620. C(y) :- A(x), x <= 3752, y = x + 9081. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2812) B(-3808) C(11893)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x > 2811 and where x <= 3752. The original model has one A(x), and x can be solved with A(2812) B(-3808) C(11893)."
+    },
+    {
+        "instruction": "Explain why this model is solvable",
+        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8152, y = x + 357. C(y) :- A(x), x > 1377, y = x - 9758. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1378) B(1735) C(-8380)",
+        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8152 and where x > 1377. The original model has one A(x), and x can be solved with A(1378) B(1735) C(-8380)."
+    },
+    {
+        "instruction": "Explain why this model is not solvable",
+        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 902.05, y = x + 8057.76. C(y) :- A(x), x > 9557.33, y = x - 3726.0. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 201444/25) C(x - 3726)",
+        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 902.05. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9557.33. The original model contains only one A(x), and x cannot be both <= 902.05 and > 9557.33."
+    }
+]

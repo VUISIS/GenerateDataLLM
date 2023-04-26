@@ -1,0 +1,16 @@
+domain DOM
+{
+	A ::= new (id1: Real).
+	B ::= (id1: Real).
+	C ::= (id1: Real).
+	B(y) :- A(x), x <= 902.05, y = x + 8057.76.
+	C(y) :- A(x), x > 9557.33, y = x - 3726.0.
+	goodModel :- B(x).
+	badModel :- C(x).
+	conforms goodModel, badModel.
+}
+
+partial model pm of DOM
+{
+	A(x).
+}
