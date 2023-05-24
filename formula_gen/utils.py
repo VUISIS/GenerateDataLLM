@@ -1,6 +1,21 @@
 from enum import Enum
+import os
+from tree_sitter import Language, Parser
 
 from Microsoft.Formula.CommandLine import IMessageSink
+
+Language.build_library(
+  os.path.abspath('./libs/tree-sitter-formula/build/formula.so'),
+
+  [
+    os.path.abspath('./libs/tree-sitter-formula')
+  ]
+)
+
+FORMULA_LANGUAGE = Language(os.path.abspath('./libs/tree-sitter-formula/build/formula.so'), 'formula')
+
+FORMULA_PARSER = Parser()
+FORMULA_PARSER.set_language(FORMULA_LANGUAGE)
 
 class EqualOPS(Enum):
     GE = 0

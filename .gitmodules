@@ -1,0 +1,3 @@
+[submodule "libs/tree-sitter-formula"]
+	path = libs/tree-sitter-formula
+	url = git@github.com:VUISIS/tree-sitter-formula.git
