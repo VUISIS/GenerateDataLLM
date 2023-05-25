@@ -33,16 +33,16 @@ def accumulate(l):
     d = {}
     for key, subiter in it:
         if key.text.decode() not in d:
-            d[key.text.decode()] = [item[0].text.decode() for item in subiter if item[0].text.decode() == key.text.decode()]
+            d[key.text.decode()] = [item[0] for item in subiter if item[0].text.decode() == key.text.decode()]
         else:
-            d[key.text.decode()] += [item[0].text.decode() for item in subiter if item[0].text.decode() == key.text.decode()]
+            d[key.text.decode()] += [item[0] for item in subiter if item[0].text.decode() == key.text.decode()]
 
     return d
 
 def generate_domain(file_txt):
     relops_query = FORMULA_LANGUAGE.query("""
-    (constraint (func_term) (relop) @rel_op (func_term (atom (constant (_) @num))))
-    (constraint (func_term) (relop) (func_term (func_term) (binop) @binop (func_term (atom (constant (_) @num))))) 
+    (constraint (func_term) (relop) (func_term (atom (constant (_))))) @rel_constraint
+    (constraint (func_term) (relop) (func_term (func_term) (binop) (func_term (atom (constant (_)))))) @bin_constraint 
     """)
 
     name_query = FORMULA_LANGUAGE.query("""
@@ -54,34 +54,49 @@ def generate_domain(file_txt):
     (dom_sentence (body_list (body (constraint (func_term (atom (id) @rule_name))))))
     (rule (func_term_list (func_or_compr (func_term (id) @rule_name))))
     (rule (body_list (body (constraint (func_term (id) @rule_name)))))
-    (rule (body_list (body (constraint (func_term (atom (id) @rule_name))))))
+    (rule (body_list (body (constraint (func_term (atom (id) @rule_name)) .))))
     """)
     tree = FORMULA_PARSER.parse(bytes(file_txt, 'utf8'), keep_text=True)
 
     cap = name_query.captures(tree.root_node)
-    print(accumulate(cap))
+    names = accumulate(cap)
+    for item in names.items():
+        k, v = item
+        name = randomname.get_name()
+        ns = name.split("-")
+        if random.randint(0,1):
+            name = ns[0]
+            if random.randint(0,1):
+                name = name.capitalize()
+        else:
+            ns[1] = ns[1].capitalize()
+            name = ns[0] + ns[1]
+
+        file_txt = re.sub("([^\w])"+k+"([^\w])", r'\1' + name + r'\2', file_txt)
     
     cap = relops_query.captures(tree.root_node)
     for node in cap:
         n, t = node
-        newtxt = ""
-        if t == 'rel_op':
+        if t == 'rel_constraint':
             newtxt = equalOps[EqualOPS(random.randint(0,3))]
-        elif t == 'num':
-            newtxt = get_random_decimal(Types.Integer)
-        elif t == 'binop':
+            newnum = get_random_decimal(Types.Integer)
+            const_list = n.text.decode().split(' ')
+            if len(const_list) == 3:
+                file_txt = re.sub("([^\w\d]" + const_list[0] + ")\s*" + const_list[1] + "\s*" + const_list[2]  + "([^\w\d])", r'\1' + " " + newtxt + " " + newnum + r'\2', file_txt, 1)
+        elif t == 'bin_constraint':
             newtxt = arithOps[ArithOPS(random.randint(0,1))]
-
-        if len(newtxt) > 0:
-            file_txt = file_txt.replace(n.text.decode(), newtxt)
+            newnum = get_random_decimal(Types.Integer)
+            const_list = n.text.decode().split(' ')
+            if len(const_list) == 3:
+                file_txt = re.sub("([^\w\d]" + const_list[0] + ")\s*" + const_list[1] + "\s*" + const_list[2]  + "([^\w\d])", r'\1' + " " + newtxt + " " + newnum + r'\2', file_txt, 1)
     
-    file = open("./temp.4ml", 'w')
+    file = open(os.path.abspath("./temp.4ml"), 'w')
     try:
         file.write(file_txt)
     finally:
         file.close()
     
-    return FORMULA_PARSER.parse(bytes(file_txt, 'utf8'), tree, keep_text=True)
+    return file_txt
 
 def generate_solution():
     sw = StringWriter()
@@ -97,90 +112,116 @@ def generate_solution():
     if not ci.DoCommand("wait on"):
         raise Exception("Wait on command failed.")
     
-    example_files = [join(example_path, f) for f in listdir(example_path) if isfile(join(example_path, f)) and f.endswith(".4ml") and not f.startswith("arm")]
     symbolic_files = [join(symbolic_path, f) for f in listdir(symbolic_path) if isfile(join(symbolic_path, f))and f.endswith(".4ml")]
-    total_files = example_files + symbolic_files
 
-    for i in range(1):
-        if not ci.DoCommand("unload *"):
-            raise Exception("Unload command failed.")
-        if not ci.DoCommand("tunload *"):
-            raise Exception("tunload command failed.")
-        
-        temp_file = random.choice(total_files)
-
-        file = open("/Users/stephen/git/formula/Tst/Tests/Symbolic/Simple.4ml", 'r')
-        file_txt = ""
+    for ftxt in symbolic_files:
+        print(ftxt)
+        file = open(ftxt, 'r')
+        orig_file_txt = ""
         try:
-            file_txt = file.read()
+            orig_file_txt = file.read()
         finally:
             file.close()
 
-        tree = generate_domain(file_txt)
+        for idx in range(1000):
+            file_txt = ""
+            if not ci.DoCommand("unload *"):
+                raise Exception("Unload command failed.")
+            if not ci.DoCommand("tunload *"):
+                raise Exception("tunload command failed.")
 
-        if not ci.DoCommand("load " + os.path.abspath("./temp.4ml")):
-            return
 
-        name_query = FORMULA_LANGUAGE.query("""
-        (model_sig_config (model_sig (model_intro (bareid) @pm_name (mod_ref (mod_ref_no_rename (bareid) @dom_name)))))
-        """)
+            if idx > 0:
+                file_txt = generate_domain(orig_file_txt)
 
-        cap = name_query.captures(tree.root_node)
-        domain = ""
-        partial_model = ""
+                if not ci.DoCommand("load " + os.path.abspath("./temp.4ml")):
+                    return
+            else:
+                file_txt = orig_file_txt
+                if not ci.DoCommand("load " + ftxt):
+                    return
+                
+            tree = FORMULA_PARSER.parse(bytes(file_txt, 'utf8'), keep_text=True)
 
-        for node in cap:
-            n, t = node
-            if t == 'dom_name':
-                domain = n.text.decode()
-            elif t == 'pm_name':
-                partial_model = n.text.decode()
-        print(domain)
-        print(partial_model)
-        solve_cmd = "solve " + partial_model + " 10 " + domain + ".conforms"
+            name_query = FORMULA_LANGUAGE.query("""
+            (model_sig_config (model_sig (model_intro (bareid) @pm_name (mod_ref (mod_ref_no_rename (bareid) @dom_name)))))
+            """)
 
-        if not ci.DoCommand(solve_cmd):
-            raise Exception("Solve command failed.")
+            cap = name_query.captures(tree.root_node)
+            domain = ""
+            partial_model = ""
 
-        sw.GetStringBuilder().Clear()
-        if not ci.DoCommand("extract 0 0 test"):
-            raise Exception("Extract command failed.")
-        output_list = sw.ToString().split("\n")
-        conflict_str = ""
-        solution_str = ""
-        print(output_list)
-        entry = {}
-        for idx, line in enumerate(output_list):
-            if "Model not solvable." in line:
-                print("Model not solvable")
-                print(conflict_str)
-                entry["instruction"] = "Explain why this model is not solvable"
-                for subline in output_list:
-                    if "Conflicts:" in subline:
-                        conflict_str += subline.strip().replace("Conflicts: ", "")
-                entry["input"] = file_txt + "," + conflict_str
-                '''output = "This model cannot be solved because it requires a goodModel and a badModel.\n"
-                output += "A goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x " + equalOps_str[0] + " " + num_str[0] + ". "
-                output += "A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x " + equalOps_str[1] + " " + num_str[1] + ". "
-                output += "The original model contains only one A(x), and x cannot be both " + equalOps_str[0] + " " + num_str[0] + " and " + equalOps_str[1] + " " + num_str[1] + "."
-                entry["output"] = output'''
-                dataList.append(entry)
-            elif "Solution number" in line:
-                entry["instruction"] = "Explain why this model is solvable"
-                start = idx + 1
-                nextstr = "Solution"
-                while len(nextstr) > 0:
-                    nextstr = output_list[start]
-                    solution_str += " " + nextstr
-                    start += 1
-                print("Model solvable")
-                print(solution_str)
-                entry["input"] = file_txt + ", " + solution_str.strip()
-                '''output = "This model can be solved because both goodModel and badModel are derived where x " + equalOps_str[0] + " " + num_str[0] + " and "
-                output += "where x " + equalOps_str[1] + " " + num_str[1] + ". "
-                output += "The original model has one A(x), and x can be solved with " + solution_str.strip() + "."
-                entry["output"] = output'''
-                dataList.append(entry)
+            for node in cap:
+                n, t = node
+                if t == 'dom_name':
+                    domain = n.text.decode()
+                elif t == 'pm_name':
+                    partial_model = n.text.decode()
+
+            solve_cmd = "solve " + partial_model + " 1 " + domain + ".conforms"
+
+            rule_query = FORMULA_LANGUAGE.query('''
+            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name "''' + domain + '''"))) 
+            (dom_sentences (dom_sentence_config (dom_sentence (rule) @rule))))
+            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name "''' + domain + '''"))) 
+            (dom_sentences (dom_sentence_config (dom_sentence (body_list) @conforms))))
+            ''')
+
+            cap = rule_query.captures(tree.root_node)
+            rules = {}
+            conforms = []
+            for node in cap:
+                n, t = node
+                if t == 'rule':
+                    rule = n.text.decode()
+                    match = re.search(r'(.+):-\s*(.*)', rule, re.DOTALL)
+                    rules[match.group(1).strip()] = match.group(2).strip()
+                elif t == 'conforms':
+                    forms = n.text.decode()
+                    if "," in forms:
+                        form_list = forms.split(",")
+                        for f in form_list:
+                            conforms.append(f.strip())
+                    else:
+                        conforms.append(n.text.decode())
+            if not ci.DoCommand(solve_cmd):
+                raise Exception("Solve command failed.")
+
+            sw.GetStringBuilder().Clear()
+            if not ci.DoCommand("extract 0 0 test"):
+                raise Exception("Extract command failed.")
+            output_list = sw.ToString().split("\n")
+            conflict_str = ""
+            solution_str = ""
+            entry = {}
+            for idx, line in enumerate(output_list):
+                if "Model not solvable." in line:
+                    entry["instruction"] = "Explain why this model is not solvable"
+                    for subline in output_list:
+                        if "Conflicts:" in subline:
+                            conflict_str += subline.strip().replace("Conflicts: ", "")
+                    entry["input"] = file_txt + "," + conflict_str
+                    output = "This model cannot be solved because it requires the conformity of the following rules " 
+                    output += ", ".join(conforms) + ".\n"
+                    for k,v in rules.items():
+                        output += "A " + k + " exists only if the following constraints are satisfied " + v + "\n"
+                    entry["output"] = output
+                    dataList.append(entry)
+                elif "Solution number" in line:
+                    entry["instruction"] = "Explain why this model is solvable"
+                    start = idx + 1
+                    nextstr = "Solution"
+                    while len(nextstr) > 0:
+                        nextstr = output_list[start]
+                        solution_str += " " + nextstr
+                        start += 1
+                    entry["input"] = file_txt + ", " + solution_str.strip()
+                    output = "This model can be solved because of the conformity of the folloeing rules "
+                    output += ", ".join(conforms) + ".\n"
+                    for k,v in rules.items():
+                        output += "A rule " + k + " is derived because these constraints are satisfied " + v + "\n"
+                    entry["output"] = output
+                    dataList.append(entry)
 
     f = open(os.path.abspath("./data.json"), 'w')
     f.write(json.dumps(dataList, indent=4))
