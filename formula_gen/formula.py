@@ -22,9 +22,9 @@ symbolic_path = '/Users/stephen/git/formula/Tst/Tests/Symbolic'
 def get_random_decimal(type_rand):
     match type_rand:
         case Types.Integer:
-            return str(random.randint(-1000,1000))
+            return str(random.randint(-100,100))
         case Types.Real:
-            return str(round(random.uniform(-1000.0, 1000.0), 2))
+            return str(round(random.uniform(-100.0, 100.0), 2))
         case _:
             raise Exception("Type not found in utils.formulaTypes.")
 
@@ -57,6 +57,7 @@ def generate_domain(file_txt):
     (rule (body_list (body (constraint (func_term (atom (id) @rule_name)) .))))
     """)
     tree = FORMULA_PARSER.parse(bytes(file_txt, 'utf8'), keep_text=True)
+    negList = ["sum","max","count","maxAll","minAll","min","or","orAll","and","andAll", "Boolean", "Integer"]
 
     cap = name_query.captures(tree.root_node)
     names = accumulate(cap)
@@ -66,13 +67,12 @@ def generate_domain(file_txt):
         ns = name.split("-")
         if random.randint(0,1):
             name = ns[0]
-            if random.randint(0,1):
-                name = name.capitalize()
+            name = name.capitalize()
         else:
             ns[1] = ns[1].capitalize()
             name = ns[0] + ns[1]
-
-        file_txt = re.sub("([^\w])"+k+"([^\w])", r'\1' + name + r'\2', file_txt)
+        if not k in negList:
+            file_txt = re.sub("([^\w])"+k+"([^\w])", r'\1' + name + r'\2', file_txt)
     
     cap = relops_query.captures(tree.root_node)
     for node in cap:
@@ -81,13 +81,13 @@ def generate_domain(file_txt):
             newtxt = equalOps[EqualOPS(random.randint(0,3))]
             newnum = get_random_decimal(Types.Integer)
             const_list = n.text.decode().split(' ')
-            if len(const_list) == 3:
+            if len(const_list) == 3 and not const_list[2] in negList:
                 file_txt = re.sub("([^\w\d]" + const_list[0] + ")\s*" + const_list[1] + "\s*" + const_list[2]  + "([^\w\d])", r'\1' + " " + newtxt + " " + newnum + r'\2', file_txt, 1)
         elif t == 'bin_constraint':
             newtxt = arithOps[ArithOPS(random.randint(0,1))]
             newnum = get_random_decimal(Types.Integer)
             const_list = n.text.decode().split(' ')
-            if len(const_list) == 3:
+            if len(const_list) == 3 and not const_list[2] in negList:
                 file_txt = re.sub("([^\w\d]" + const_list[0] + ")\s*" + const_list[1] + "\s*" + const_list[2]  + "([^\w\d])", r'\1' + " " + newtxt + " " + newnum + r'\2', file_txt, 1)
     
     file = open(os.path.abspath("./temp.4ml"), 'w')
@@ -123,7 +123,7 @@ def generate_solution():
         finally:
             file.close()
 
-        for idx in range(1000):
+        for idx in range(500):
             file_txt = ""
             if not ci.DoCommand("unload *"):
                 raise Exception("Unload command failed.")
