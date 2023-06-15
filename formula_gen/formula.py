@@ -16,7 +16,30 @@ from Microsoft.Formula.CommandLine import CommandInterface, CommandLineProgram
 from System.IO import StringWriter
 from System import Console  
 
-example_path = '/Users/stephen/git/formula/Doc/Samples'
+solve_instr = ["Explain why this model is solvable.",
+               "Why is this model solvable?",
+               "Solve the following model.",
+               "Conclude why this is solvable.",
+               "Give an explanation why this is solvable.",
+               "What is the solution?",
+               "What is the solution to this model?",
+               "Given a formula file, why is it solvable?",
+               "Why is this formula file solvable?",
+               "The following model is solvable. Why?",
+               "This formula file is solvable because"]
+
+unsat_instr = ["Explain why this model is not solvable.",
+               "Why is this model unsolvable?",
+               "Explain the conflicts in the following model.",
+               "Conclude why this is unsolvable.",
+               "Give an explanation why this is not solvable.",
+               "What is the conflicts?",
+               "What is the conflicts in this model?",
+               "Given a formula file, why is it unsolvable?",
+               "Why is this formula file unsolvable?",
+               "The following model is not solvable. Why?",
+               "This formula file is not solvable because"]
+
 symbolic_path = '/Users/stephen/git/formula/Tst/Tests/Symbolic'
 
 def get_random_decimal(type_rand):
@@ -123,7 +146,7 @@ def generate_solution():
         finally:
             file.close()
 
-        for idx in range(500):
+        for idx in range(10):
             file_txt = ""
             if not ci.DoCommand("unload *"):
                 raise Exception("Unload command failed.")
@@ -183,45 +206,47 @@ def generate_solution():
                         for f in form_list:
                             conforms.append(f.strip())
                     else:
-                        conforms.append(n.text.decode())
+                        conforms.append(n.text.decode().strip())
             if not ci.DoCommand(solve_cmd):
                 raise Exception("Solve command failed.")
 
             sw.GetStringBuilder().Clear()
-            if not ci.DoCommand("extract 0 0 test"):
+            if not ci.DoCommand("extract 0 0 0"):
                 raise Exception("Extract command failed.")
-            output_list = sw.ToString().split("\n")
-            conflict_str = ""
-            solution_str = ""
+            console_output = sw.ToString()
             entry = {}
-            for idx, line in enumerate(output_list):
-                if "Model not solvable." in line:
-                    entry["instruction"] = "Explain why this model is not solvable"
-                    for subline in output_list:
-                        if "Conflicts:" in subline:
-                            conflict_str += subline.strip().replace("Conflicts: ", "")
-                    entry["input"] = file_txt + "," + conflict_str
-                    output = "This model cannot be solved because it requires the conformity of the following rules " 
-                    output += ", ".join(conforms) + ".\n"
-                    for k,v in rules.items():
-                        output += "A " + k + " exists only if the following constraints are satisfied " + v + "\n"
-                    entry["output"] = output
-                    dataList.append(entry)
-                elif "Solution number" in line:
-                    entry["instruction"] = "Explain why this model is solvable"
-                    start = idx + 1
-                    nextstr = "Solution"
-                    while len(nextstr) > 0:
-                        nextstr = output_list[start]
-                        solution_str += " " + nextstr
-                        start += 1
-                    entry["input"] = file_txt + ", " + solution_str.strip()
-                    output = "This model can be solved because of the conformity of the folloeing rules "
-                    output += ", ".join(conforms) + ".\n"
-                    for k,v in rules.items():
-                        output += "A rule " + k + " is derived because these constraints are satisfied " + v + "\n"
-                    entry["output"] = output
-                    dataList.append(entry)
+            output = ""
+            
+            if re.search("Model\s+not\s+solvable\.", console_output):
+                matches = []
+                matches += re.findall("[a-zA-Z]+\.([a-zA-Z]+)", console_output)
+                matches += re.findall("([a-zA-Z]+\()", console_output)
+                entry["instruction"] = random.choice(unsat_instr)
+                entry["input"] = file_txt + ", " + ", ".join(matches)
+                output = "This model is unsolvable because it requires the conformity of the following rules [" 
+                output += ", ".join(conforms) + "].\n"
+
+                output += "Conflicts exist in these constraints:\n\n"
+                for m in matches:
+                    for k in rules.keys():
+                        if k.find(m) != -1:
+                            output += k + " -> [" + re.sub('\s+',' ', rules[k]) + "]\n"
+
+                entry["output"] = output
+                dataList.append(entry)
+            elif re.search("Solution\s+number", console_output):
+                entry["instruction"] = random.choice(solve_instr)
+                output = "This model is solvable because of the conformity of the following rules ["
+                output += ", ".join(conforms) + "].\n"
+                m = re.findall("[a-zA-Z]+\(.+\)", console_output)
+                entry["input"] = re.sub('\s+',' ', file_txt) + ", " + ", ".join(m)
+
+                output += "A solution exists for these constraints:\n\n"
+                for k in rules.keys():
+                    output += k + " -> [" + re.sub('\s+',' ', rules[k]) + "]\n"
+
+                entry["output"] = output
+                dataList.append(entry)
 
     f = open(os.path.abspath("./data.json"), 'w')
     f.write(json.dumps(dataList, indent=4))

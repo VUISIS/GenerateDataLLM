@@ -1,502 +1,602 @@
 [
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5525, y = x + 127. C(y) :- A(x), x >= 26, y = x - 1103. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5526) B(5653) C(4423)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 5525 and where x >= 26. The original model has one A(x), and x can be solved with A(5526) B(5653) C(4423)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain SymbolicMinAll { A ::= new (x : Integer). B ::= new (x : Integer). minVal ::= (x : Integer). goodA :- a is A, a.x < 10. goodB :- b is B, b.x > 20. minVal(x) :- a is A, b is B, x = minAll(a.x,{a.x, b.x}), x : Integer. goodModel :- m is minVal, m.x < 5. conforms goodModel. } partial model pm of SymbolicMinAll { a is A(x). b is B(y). } , A(0), B(0), minVal(0)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\ngoodA -> [a is A, a.x < 10]\ngoodB -> [b is B, b.x > 20]\nminVal(x) -> [a is A, b is B, x = minAll(a.x,{a.x, b.x}), x : Integer]\ngoodModel -> [m is minVal, m.x < 5]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 2720, y = x + 7869. C(y) :- A(x), x <= 1476, y = x - 8254. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 7869) C(x - 8254)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 2720. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 1476. The original model contains only one A(x), and x cannot be both >= 2720 and <= 1476."
+        "instruction": "Solve the following model.",
+        "input": "domain Prompt { complicatedSkirmish ::= new (x : Integer). spicyBrook ::= new (x : Integer). Extended ::= (x : Integer). Fast :- a is complicatedSkirmish, a.x >= 98. lightLine :- b is spicyBrook, b.x > -1. Extended(x) :- a is complicatedSkirmish, b is spicyBrook, x = minAll(a.x,{a.x, b.x}), x : Integer. Foggy :- m is Extended, m.x > 52. conforms Foggy. } partial model Generous of Prompt { a is complicatedSkirmish(x). b is spicyBrook(y). } , complicatedSkirmish(53), spicyBrook(53), Extended(53)",
+        "output": "This model is solvable because of the conformity of the following rules [Foggy].\nA solution exists for these constraints:\n\nFast -> [a is complicatedSkirmish, a.x >= 98]\nlightLine -> [b is spicyBrook, b.x > -1]\nExtended(x) -> [a is complicatedSkirmish, b is spicyBrook, x = minAll(a.x,{a.x, b.x}), x : Integer]\nFoggy -> [m is Extended, m.x > 52]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 9480.91, y = x - 6828.26. C(y) :- A(x), x < 1805.6, y = x + 3198.59. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 341413/50) C(x + 319859/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 9480.91. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 1805.6. The original model contains only one A(x), and x cannot be both >= 9480.91 and < 1805.6."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Finite { stringyRedoubt ::= new (x : Integer). plumbMole ::= new (x : Integer). Roaring ::= (x : Integer). mildCouch :- a is stringyRedoubt, a.x <= 14. Breezy :- b is plumbMole, b.x > 90. Roaring(x) :- a is stringyRedoubt, b is plumbMole, x = minAll(a.x,{a.x, b.x}), x : Integer. Full :- m is Roaring, m.x >= 2. conforms Full. } partial model Warm of Finite { a is stringyRedoubt(x). b is plumbMole(y). } , stringyRedoubt(2), plumbMole(2), Roaring(2)",
+        "output": "This model is solvable because of the conformity of the following rules [Full].\nA solution exists for these constraints:\n\nmildCouch -> [a is stringyRedoubt, a.x <= 14]\nBreezy -> [b is plumbMole, b.x > 90]\nRoaring(x) -> [a is stringyRedoubt, b is plumbMole, x = minAll(a.x,{a.x, b.x}), x : Integer]\nFull -> [m is Roaring, m.x >= 2]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 941.96, y = x - 7424.32. C(y) :- A(x), x > 2102.61, y = x + 1982.21. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 185608/25) C(x + 198221/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 941.96. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 2102.61. The original model contains only one A(x), and x cannot be both <= 941.96 and > 2102.61."
+        "instruction": "What is the solution?",
+        "input": "domain customerNeutron { collinearColonnade ::= new (x : Integer). pokyDefense ::= new (x : Integer). rectilinearDingo ::= (x : Integer). stoneOption :- a is collinearColonnade, a.x > 5. sugarySortie :- b is pokyDefense, b.x < -84. rectilinearDingo(x) :- a is collinearColonnade, b is pokyDefense, x = minAll(a.x,{a.x, b.x}), x : Integer. Wintry :- m is rectilinearDingo, m.x <= 82. conforms Wintry. } partial model Crispy of customerNeutron { a is collinearColonnade(x). b is pokyDefense(y). } , collinearColonnade(0), pokyDefense(0), rectilinearDingo(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Wintry].\nA solution exists for these constraints:\n\nstoneOption -> [a is collinearColonnade, a.x > 5]\nsugarySortie -> [b is pokyDefense, b.x < -84]\nrectilinearDingo(x) -> [a is collinearColonnade, b is pokyDefense, x = minAll(a.x,{a.x, b.x}), x : Integer]\nWintry -> [m is rectilinearDingo, m.x <= 82]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3762.7, y = x + 555.76. C(y) :- A(x), x <= 1091.9, y = x - 2111.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 13894/25) C(x - 42229/20)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3762.7. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 1091.9. The original model contains only one A(x), and x cannot be both > 3762.7 and <= 1091.9."
+        "instruction": "Solve the following model.",
+        "input": "domain icyAngora { Giant ::= new (x : Integer). Sugary ::= new (x : Integer). Equilateral ::= (x : Integer). Trusting :- a is Giant, a.x < 9. Drab :- b is Sugary, b.x < 30. Equilateral(x) :- a is Giant, b is Sugary, x = minAll(a.x,{a.x, b.x}), x : Integer. Creative :- m is Equilateral, m.x > -64. conforms Creative. } partial model Electric of icyAngora { a is Giant(x). b is Sugary(y). } , Giant(0), Sugary(0), Equilateral(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Creative].\nA solution exists for these constraints:\n\nTrusting -> [a is Giant, a.x < 9]\nDrab -> [b is Sugary, b.x < 30]\nEquilateral(x) -> [a is Giant, b is Sugary, x = minAll(a.x,{a.x, b.x}), x : Integer]\nCreative -> [m is Equilateral, m.x > -64]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 7091.25, y = x - 9158.68. C(y) :- A(x), x <= 8284.55, y = x + 1375.7. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(28365/4) B(-206743/100) C(169339/20)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 7091.25 and where x <= 8284.55. The original model has one A(x), and x can be solved with A(28365/4) B(-206743/100) C(169339/20)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain Bronze { antiqueFrontlist ::= new (x : Integer). immatureTurkey ::= new (x : Integer). Exact ::= (x : Integer). vintageRowhouse :- a is antiqueFrontlist, a.x >= 47. worriedCore :- b is immatureTurkey, b.x >= 8. Exact(x) :- a is antiqueFrontlist, b is immatureTurkey, x = minAll(a.x,{a.x, b.x}), x : Integer. nullSlate :- m is Exact, m.x >= 69. conforms nullSlate. } partial model Wide of Bronze { a is antiqueFrontlist(x). b is immatureTurkey(y). } , antiqueFrontlist(69), immatureTurkey(69), Exact(69)",
+        "output": "This model is solvable because of the conformity of the following rules [nullSlate].\nA solution exists for these constraints:\n\nvintageRowhouse -> [a is antiqueFrontlist, a.x >= 47]\nworriedCore -> [b is immatureTurkey, b.x >= 8]\nExact(x) -> [a is antiqueFrontlist, b is immatureTurkey, x = minAll(a.x,{a.x, b.x}), x : Integer]\nnullSlate -> [m is Exact, m.x >= 69]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 8248, y = x + 4735. C(y) :- A(x), x <= 2848, y = x - 7482. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 4735) C(x - 7482)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 8248. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2848. The original model contains only one A(x), and x cannot be both >= 8248 and <= 2848."
+        "instruction": "What is the solution?",
+        "input": "domain Persistent { blackTemplate ::= new (x : Integer). agileBag ::= new (x : Integer). Faded ::= (x : Integer). shrewdPulse :- a is blackTemplate, a.x > 15. frigidDebug :- b is agileBag, b.x >= -66. Faded(x) :- a is blackTemplate, b is agileBag, x = minAll(a.x,{a.x, b.x}), x : Integer. Plastic :- m is Faded, m.x > 61. conforms Plastic. } partial model Mad of Persistent { a is blackTemplate(x). b is agileBag(y). } , blackTemplate(62), agileBag(62), Faded(62)",
+        "output": "This model is solvable because of the conformity of the following rules [Plastic].\nA solution exists for these constraints:\n\nshrewdPulse -> [a is blackTemplate, a.x > 15]\nfrigidDebug -> [b is agileBag, b.x >= -66]\nFaded(x) -> [a is blackTemplate, b is agileBag, x = minAll(a.x,{a.x, b.x}), x : Integer]\nPlastic -> [m is Faded, m.x > 61]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 942.41, y = x - 585.37. C(y) :- A(x), x < 6783.82, y = x + 2189.88. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(94241/100) B(8926/25) C(313229/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 942.41 and where x < 6783.82. The original model has one A(x), and x can be solved with A(94241/100) B(8926/25) C(313229/100)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain sourTaste { Global ::= new (x : Integer). Meek ::= new (x : Integer). Extremal ::= (x : Integer). frayedSquash :- a is Global, a.x >= 57. staffTiger :- b is Meek, b.x < 67. Extremal(x) :- a is Global, b is Meek, x = minAll(a.x,{a.x, b.x}), x : Integer. Contemporary :- m is Extremal, m.x > -92. conforms Contemporary. } partial model Sienna of sourTaste { a is Global(x). b is Meek(y). } , Global(0), Meek(0), Extremal(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Contemporary].\nA solution exists for these constraints:\n\nfrayedSquash -> [a is Global, a.x >= 57]\nstaffTiger -> [b is Meek, b.x < 67]\nExtremal(x) -> [a is Global, b is Meek, x = minAll(a.x,{a.x, b.x}), x : Integer]\nContemporary -> [m is Extremal, m.x > -92]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 5807.52, y = x + 2932.67. C(y) :- A(x), x > 8462.67, y = x - 7468.56. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 293267/100) C(x - 186714/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 5807.52. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 8462.67. The original model contains only one A(x), and x cannot be both < 5807.52 and > 8462.67."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Hoary { Daring ::= new (x : Integer). Sienna ::= new (x : Integer). Hoary ::= (x : Integer). Funny :- a is Daring, a.x > -42. charitableService :- b is Sienna, b.x <= -66. Hoary(x) :- a is Daring, b is Sienna, x = minAll(a.x,{a.x, b.x}), x : Integer. Smoky :- m is Hoary, m.x < -39. conforms Smoky. } partial model jumboPizza of Hoary { a is Daring(x). b is Sienna(y). } , Daring(-40), Sienna(0), Hoary(-40)",
+        "output": "This model is solvable because of the conformity of the following rules [Smoky].\nA solution exists for these constraints:\n\nFunny -> [a is Daring, a.x > -42]\ncharitableService -> [b is Sienna, b.x <= -66]\nHoary(x) -> [a is Daring, b is Sienna, x = minAll(a.x,{a.x, b.x}), x : Integer]\nSmoky -> [m is Hoary, m.x < -39]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 1723, y = x + 736. C(y) :- A(x), x < 5557, y = x - 1709. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1723) B(2459) C(14)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1723 and where x < 5557. The original model has one A(x), and x can be solved with A(1723) B(2459) C(14)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Abstract { Many ::= new (x : Integer). moltoPlayer ::= new (x : Integer). Binary ::= (x : Integer). obnoxiousRoot :- a is Many, a.x > 61. Soft :- b is moltoPlayer, b.x >= -10. Binary(x) :- a is Many, b is moltoPlayer, x = minAll(a.x,{a.x, b.x}), x : Integer. moltenMuntin :- m is Binary, m.x >= 53. conforms moltenMuntin. } partial model Antique of Abstract { a is Many(x). b is moltoPlayer(y). } , Many(53), moltoPlayer(53), Binary(53)",
+        "output": "This model is solvable because of the conformity of the following rules [moltenMuntin].\nA solution exists for these constraints:\n\nobnoxiousRoot -> [a is Many, a.x > 61]\nSoft -> [b is moltoPlayer, b.x >= -10]\nBinary(x) -> [a is Many, b is moltoPlayer, x = minAll(a.x,{a.x, b.x}), x : Integer]\nmoltenMuntin -> [m is Binary, m.x >= 53]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3004.16, y = x - 2585.53. C(y) :- A(x), x < 143.85, y = x + 9063.72. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 258553/100) C(x + 226593/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3004.16. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 143.85. The original model contains only one A(x), and x cannot be both > 3004.16 and < 143.85."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain SymbolicMaxAll { A ::= new (x : Integer). B ::= new (x : Integer). maxVal ::= (x : Integer). goodA :- a is A, a.x < 10. goodB :- b is B, b.x > 20. maxVal(x) :- a is A, b is B, x = maxAll(a.x,{a.x, b.x}), x : Integer. goodModel :- m is maxVal, m.x > 30. conforms goodModel. } partial model pm of SymbolicMaxAll { a is A(x). b is B(y). } , A(31), B(0), maxVal(31)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\ngoodA -> [a is A, a.x < 10]\ngoodB -> [b is B, b.x > 20]\nmaxVal(x) -> [a is A, b is B, x = maxAll(a.x,{a.x, b.x}), x : Integer]\ngoodModel -> [m is maxVal, m.x > 30]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 8870.06, y = x + 9208.45. C(y) :- A(x), x >= 8510.58, y = x - 3190.36. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(425529/50) B(1771903/100) C(266011/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8870.06 and where x >= 8510.58. The original model has one A(x), and x can be solved with A(425529/50) B(1771903/100) C(266011/50)."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain ivoryRaspberry { Bronze ::= new (x : Integer). feldsparCommission ::= new (x : Integer). Ordered ::= (x : Integer). Speedy :- a is Bronze, a.x >= -55. chillyBlend :- b is feldsparCommission, b.x < -89. Ordered(x) :- a is Bronze, b is feldsparCommission, x = maxAll(a.x,{a.x, b.x}), x : Integer. Connected :- m is Ordered, m.x <= 54. conforms Connected. } partial model Grouchy of ivoryRaspberry { a is Bronze(x). b is feldsparCommission(y). } , Bronze(0), feldsparCommission(0), Ordered(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Connected].\nA solution exists for these constraints:\n\nSpeedy -> [a is Bronze, a.x >= -55]\nchillyBlend -> [b is feldsparCommission, b.x < -89]\nOrdered(x) -> [a is Bronze, b is feldsparCommission, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nConnected -> [m is Ordered, m.x <= 54]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8714, y = x + 2361. C(y) :- A(x), x <= 481, y = x - 9261. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(2361) C(-9261)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 8714 and where x <= 481. The original model has one A(x), and x can be solved with A(0) B(2361) C(-9261)."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain Obtuse { solubleJavanese ::= new (x : Integer). Worn ::= new (x : Integer). Vicious ::= (x : Integer). inflammableRavvet :- a is solubleJavanese, a.x <= -62. coldNectar :- b is Worn, b.x > 69. Vicious(x) :- a is solubleJavanese, b is Worn, x = maxAll(a.x,{a.x, b.x}), x : Integer. Ornery :- m is Vicious, m.x >= -72. conforms Ornery. } partial model Solid of Obtuse { a is solubleJavanese(x). b is Worn(y). } , solubleJavanese(0), Worn(0), Vicious(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Ornery].\nA solution exists for these constraints:\n\ninflammableRavvet -> [a is solubleJavanese, a.x <= -62]\ncoldNectar -> [b is Worn, b.x > 69]\nVicious(x) -> [a is solubleJavanese, b is Worn, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nOrnery -> [m is Vicious, m.x >= -72]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5403.59, y = x + 6141.21. C(y) :- A(x), x >= 1890.46, y = x - 186.68. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(94523/50) B(803167/100) C(85189/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5403.59 and where x >= 1890.46. The original model has one A(x), and x can be solved with A(94523/50) B(803167/100) C(85189/50)."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain abstractHeather { Pounded ::= new (x : Integer). fastGradient ::= new (x : Integer). randomizedEquator ::= (x : Integer). caramelPath :- a is Pounded, a.x > 68. swiftFormat :- b is fastGradient, b.x <= 7. randomizedEquator(x) :- a is Pounded, b is fastGradient, x = maxAll(a.x,{a.x, b.x}), x : Integer. spryStick :- m is randomizedEquator, m.x > -49. conforms spryStick. } partial model ebonySuv of abstractHeather { a is Pounded(x). b is fastGradient(y). } , Pounded(0), fastGradient(0), randomizedEquator(0)",
+        "output": "This model is solvable because of the conformity of the following rules [spryStick].\nA solution exists for these constraints:\n\ncaramelPath -> [a is Pounded, a.x > 68]\nswiftFormat -> [b is fastGradient, b.x <= 7]\nrandomizedEquator(x) -> [a is Pounded, b is fastGradient, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nspryStick -> [m is randomizedEquator, m.x > -49]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6604, y = x - 6560. C(y) :- A(x), x <= 4270, y = x + 6221. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-6560) C(6221)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 6604 and where x <= 4270. The original model has one A(x), and x can be solved with A(0) B(-6560) C(6221)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Shortest { graveRiesling ::= new (x : Integer). Buoyant ::= new (x : Integer). Ferocious ::= (x : Integer). muteCantaloupe :- a is graveRiesling, a.x < -9. intractableAmbiance :- b is Buoyant, b.x < 10. Ferocious(x) :- a is graveRiesling, b is Buoyant, x = maxAll(a.x,{a.x, b.x}), x : Integer. breezyContent :- m is Ferocious, m.x <= 86. conforms breezyContent. } partial model Plum of Shortest { a is graveRiesling(x). b is Buoyant(y). } , graveRiesling(0), Buoyant(0), Ferocious(0)",
+        "output": "This model is solvable because of the conformity of the following rules [breezyContent].\nA solution exists for these constraints:\n\nmuteCantaloupe -> [a is graveRiesling, a.x < -9]\nintractableAmbiance -> [b is Buoyant, b.x < 10]\nFerocious(x) -> [a is graveRiesling, b is Buoyant, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nbreezyContent -> [m is Ferocious, m.x <= 86]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 9660, y = x - 5417. C(y) :- A(x), x < 5711, y = x + 376. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5417) C(x + 376)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 9660. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 5711. The original model contains only one A(x), and x cannot be both >= 9660 and < 5711."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain Concurrent { endothermicShift ::= new (x : Integer). boxyCougar ::= new (x : Integer). oilyEquity ::= (x : Integer). jelliedAutobiography :- a is endothermicShift, a.x >= 7. candiedSimilarity :- b is boxyCougar, b.x > 1. oilyEquity(x) :- a is endothermicShift, b is boxyCougar, x = maxAll(a.x,{a.x, b.x}), x : Integer. Narrow :- m is oilyEquity, m.x <= 1. conforms Narrow. } partial model wittyEpoch of Concurrent { a is endothermicShift(x). b is boxyCougar(y). } , endothermicShift(0), boxyCougar(0), oilyEquity(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Narrow].\nA solution exists for these constraints:\n\njelliedAutobiography -> [a is endothermicShift, a.x >= 7]\ncandiedSimilarity -> [b is boxyCougar, b.x > 1]\noilyEquity(x) -> [a is endothermicShift, b is boxyCougar, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nNarrow -> [m is oilyEquity, m.x <= 1]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 891, y = x + 3891. C(y) :- A(x), x > 1256, y = x - 1859. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 3891) C(x - 1859)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 891. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 1256. The original model contains only one A(x), and x cannot be both < 891 and > 1256."
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Descriptive { bareChino ::= new (x : Integer). Proper ::= new (x : Integer). Bright ::= (x : Integer). cruelDiffusion :- a is bareChino, a.x >= -59. modeGrantor :- b is Proper, b.x <= -38. Bright(x) :- a is bareChino, b is Proper, x = maxAll(a.x,{a.x, b.x}), x : Integer. balancedPalette :- m is Bright, m.x < 68. conforms balancedPalette. } partial model mildElement of Descriptive { a is bareChino(x). b is Proper(y). } , bareChino(0), Proper(0), Bright(0)",
+        "output": "This model is solvable because of the conformity of the following rules [balancedPalette].\nA solution exists for these constraints:\n\ncruelDiffusion -> [a is bareChino, a.x >= -59]\nmodeGrantor -> [b is Proper, b.x <= -38]\nBright(x) -> [a is bareChino, b is Proper, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nbalancedPalette -> [m is Bright, m.x < 68]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 3556, y = x - 7803. C(y) :- A(x), x >= 2238, y = x + 1812. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2238) B(-5565) C(4050)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 3556 and where x >= 2238. The original model has one A(x), and x can be solved with A(2238) B(-5565) C(4050)."
+        "instruction": "What is the solution?",
+        "input": "domain parallelVoid { offlineDrink ::= new (x : Integer). shyInlet ::= new (x : Integer). Obsolete ::= (x : Integer). paperDepth :- a is offlineDrink, a.x > 7. selfishVeranda :- b is shyInlet, b.x > 6. Obsolete(x) :- a is offlineDrink, b is shyInlet, x = maxAll(a.x,{a.x, b.x}), x : Integer. Yummy :- m is Obsolete, m.x >= -35. conforms Yummy. } partial model Dense of parallelVoid { a is offlineDrink(x). b is shyInlet(y). } , offlineDrink(0), shyInlet(0), Obsolete(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Yummy].\nA solution exists for these constraints:\n\npaperDepth -> [a is offlineDrink, a.x > 7]\nselfishVeranda -> [b is shyInlet, b.x > 6]\nObsolete(x) -> [a is offlineDrink, b is shyInlet, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nYummy -> [m is Obsolete, m.x >= -35]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1232, y = x + 2671. C(y) :- A(x), x >= 5152, y = x - 3832. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 2671) C(x - 3832)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 1232. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 5152. The original model contains only one A(x), and x cannot be both < 1232 and >= 5152."
+        "instruction": "Solve the following model.",
+        "input": "domain chiefBrandy { Optimal ::= new (x : Integer). oilyLambrusco ::= new (x : Integer). preparedCello ::= (x : Integer). deafeningDeductible :- a is Optimal, a.x > -90. Undecidable :- b is oilyLambrusco, b.x < -78. preparedCello(x) :- a is Optimal, b is oilyLambrusco, x = maxAll(a.x,{a.x, b.x}), x : Integer. zestyCockpit :- m is preparedCello, m.x >= -67. conforms zestyCockpit. } partial model Free of chiefBrandy { a is Optimal(x). b is oilyLambrusco(y). } , Optimal(0), oilyLambrusco(0), preparedCello(0)",
+        "output": "This model is solvable because of the conformity of the following rules [zestyCockpit].\nA solution exists for these constraints:\n\ndeafeningDeductible -> [a is Optimal, a.x > -90]\nUndecidable -> [b is oilyLambrusco, b.x < -78]\npreparedCello(x) -> [a is Optimal, b is oilyLambrusco, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nzestyCockpit -> [m is preparedCello, m.x >= -67]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 6250.34, y = x - 5048.94. C(y) :- A(x), x < 6977.46, y = x + 222.19. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(312517/50) B(6007/5) C(647253/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 6250.34 and where x < 6977.46. The original model has one A(x), and x can be solved with A(312517/50) B(6007/5) C(647253/100)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain broadDecision { skinnyModel ::= new (x : Integer). Rank ::= new (x : Integer). Greasy ::= (x : Integer). Local :- a is skinnyModel, a.x >= 52. Blocky :- b is Rank, b.x >= 24. Greasy(x) :- a is skinnyModel, b is Rank, x = maxAll(a.x,{a.x, b.x}), x : Integer. Acute :- m is Greasy, m.x < -48. conforms Acute. } partial model Threadbare of broadDecision { a is skinnyModel(x). b is Rank(y). } , skinnyModel(-49), Rank(-49), Greasy(-49)",
+        "output": "This model is solvable because of the conformity of the following rules [Acute].\nA solution exists for these constraints:\n\nLocal -> [a is skinnyModel, a.x >= 52]\nBlocky -> [b is Rank, b.x >= 24]\nGreasy(x) -> [a is skinnyModel, b is Rank, x = maxAll(a.x,{a.x, b.x}), x : Integer]\nAcute -> [m is Greasy, m.x < -48]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 1700.12, y = x - 3796.41. C(y) :- A(x), x >= 6085.62, y = x + 5061.08. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 379641/100) C(x + 126527/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1700.12. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6085.62. The original model contains only one A(x), and x cannot be both <= 1700.12 and >= 6085.62."
+        "instruction": "This formula file is solvable because",
+        "input": "domain SymbolicMax { A ::= new (x : Integer). B ::= new (x : Integer). maxVal ::= (x : Integer). goodA :- a is A, a.x > 10. goodB :- b is B, b.x > 20. maxVal(x) :- a is A, b is B, x = max(a.x, b.x). goodModel :- m is maxVal, m.x > 51. conforms goodA. conforms goodB. conforms goodModel. } partial model pm of SymbolicMax { a is A(x). b is B(y). } , A(11), B(52), maxVal(52)",
+        "output": "This model is solvable because of the conformity of the following rules [goodA, goodB, goodModel].\nA solution exists for these constraints:\n\ngoodA -> [a is A, a.x > 10]\ngoodB -> [b is B, b.x > 20]\nmaxVal(x) -> [a is A, b is B, x = max(a.x, b.x)]\ngoodModel -> [m is maxVal, m.x > 51]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 6456.82, y = x - 2331.53. C(y) :- A(x), x > 4395.51, y = x + 466.65. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(439651/100) B(103249/50) C(121579/25)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 6456.82 and where x > 4395.51. The original model has one A(x), and x can be solved with A(439651/100) B(103249/50) C(121579/25)."
+        "instruction": "What is the conflicts in this model?",
+        "input": "domain obviousDensity\n{\n  beigePlaylist ::= new (x : Integer).\n  Steel ::= new (x : Integer).\n\n  Soft ::= (x : Integer).\n\n  balancedChain :- a is beigePlaylist, a.x > 59.\n  Vibrato :- b is Steel, b.x >= -3.\n\n  Soft(x) :- a is beigePlaylist, b is Steel, x = max(a.x, b.x).\n  \n  ferociousRender :- m is Soft, m.x < -95.\n  \n  conforms balancedChain.\n  conforms Vibrato.\n  conforms ferociousRender.\n}\n\npartial model Furious of obviousDensity\n{\n  a is beigePlaylist(x).\n  b is Steel(y).\n}\n, ferociousRender, balancedChain",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [balancedChain, Vibrato, ferociousRender].\nConflicts exist in these constraints:\n\nferociousRender -> [m is Soft, m.x < -95]\nbalancedChain -> [a is beigePlaylist, a.x > 59]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 9666.58, y = x - 917.85. C(y) :- A(x), x <= 9872.0, y = x + 5954.0. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(483379/50) B(874973/100) C(781079/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 9666.58 and where x <= 9872.0. The original model has one A(x), and x can be solved with A(483379/50) B(874973/100) C(781079/50)."
+        "instruction": "Solve the following model.",
+        "input": "domain largeHead { orangeRecurrence ::= new (x : Integer). canaryUrn ::= new (x : Integer). Meek ::= (x : Integer). Threadbare :- a is orangeRecurrence, a.x >= 56. meanSkill :- b is canaryUrn, b.x > -66. Meek(x) :- a is orangeRecurrence, b is canaryUrn, x = max(a.x, b.x). mildStern :- m is Meek, m.x < 58. conforms Threadbare. conforms meanSkill. conforms mildStern. } partial model Sluggish of largeHead { a is orangeRecurrence(x). b is canaryUrn(y). } , orangeRecurrence(56), canaryUrn(56), Meek(56)",
+        "output": "This model is solvable because of the conformity of the following rules [Threadbare, meanSkill, mildStern].\nA solution exists for these constraints:\n\nThreadbare -> [a is orangeRecurrence, a.x >= 56]\nmeanSkill -> [b is canaryUrn, b.x > -66]\nMeek(x) -> [a is orangeRecurrence, b is canaryUrn, x = max(a.x, b.x)]\nmildStern -> [m is Meek, m.x < 58]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 1515.34, y = x - 5525.53. C(y) :- A(x), x <= 3974.47, y = x + 3993.11. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(75767/50) B(-401019/100) C(110169/20)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1515.34 and where x <= 3974.47. The original model has one A(x), and x can be solved with A(75767/50) B(-401019/100) C(110169/20)."
+        "instruction": "Why is this model solvable?",
+        "input": "domain Parallel { Serious ::= new (x : Integer). Relaxed ::= new (x : Integer). searingNet ::= (x : Integer). White :- a is Serious, a.x >= -78. mercilessFeature :- b is Relaxed, b.x <= 65. searingNet(x) :- a is Serious, b is Relaxed, x = max(a.x, b.x). hiddenSurface :- m is searingNet, m.x < 11. conforms White. conforms mercilessFeature. conforms hiddenSurface. } partial model adventurousQuay of Parallel { a is Serious(x). b is Relaxed(y). } , Serious(0), Relaxed(0), searingNet(0)",
+        "output": "This model is solvable because of the conformity of the following rules [White, mercilessFeature, hiddenSurface].\nA solution exists for these constraints:\n\nWhite -> [a is Serious, a.x >= -78]\nmercilessFeature -> [b is Relaxed, b.x <= 65]\nsearingNet(x) -> [a is Serious, b is Relaxed, x = max(a.x, b.x)]\nhiddenSurface -> [m is searingNet, m.x < 11]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 4778, y = x - 9123. C(y) :- A(x), x > 1359, y = x + 1836. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1360) B(-7763) C(3196)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 4778 and where x > 1359. The original model has one A(x), and x can be solved with A(1360) B(-7763) C(3196)."
+        "instruction": "Explain the conflicts in the following model.",
+        "input": "domain Simple\n{\n  jelliedCoastie ::= new (x : Integer).\n  Big ::= new (x : Integer).\n\n  Endothermic ::= (x : Integer).\n\n  constantShark :- a is jelliedCoastie, a.x <= 81.\n  raggedDolce :- b is Big, b.x > 77.\n\n  Endothermic(x) :- a is jelliedCoastie, b is Big, x = max(a.x, b.x).\n  \n  Piquant :- m is Endothermic, m.x < -41.\n  \n  conforms constantShark.\n  conforms raggedDolce.\n  conforms Piquant.\n}\n\npartial model Terminal of Simple\n{\n  a is jelliedCoastie(x).\n  b is Big(y).\n}\n, Piquant, raggedDolce",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [constantShark, raggedDolce, Piquant].\nConflicts exist in these constraints:\n\nPiquant -> [m is Endothermic, m.x < -41]\nraggedDolce -> [b is Big, b.x > 77]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 394.46, y = x + 8230.38. C(y) :- A(x), x >= 2137.77, y = x - 5985.36. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(213777/100) B(207363/20) C(-384759/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 394.46 and where x >= 2137.77. The original model has one A(x), and x can be solved with A(213777/100) B(207363/20) C(-384759/100)."
+        "instruction": "This formula file is solvable because",
+        "input": "domain Adagio { obtuseAvailability ::= new (x : Integer). creamyMean ::= new (x : Integer). irregularLacrosse ::= (x : Integer). simpleHumanist :- a is obtuseAvailability, a.x < 18. approximateBounce :- b is creamyMean, b.x <= 62. irregularLacrosse(x) :- a is obtuseAvailability, b is creamyMean, x = max(a.x, b.x). completePrint :- m is irregularLacrosse, m.x <= 34. conforms simpleHumanist. conforms approximateBounce. conforms completePrint. } partial model Excited of Adagio { a is obtuseAvailability(x). b is creamyMean(y). } , obtuseAvailability(0), creamyMean(0), irregularLacrosse(0)",
+        "output": "This model is solvable because of the conformity of the following rules [simpleHumanist, approximateBounce, completePrint].\nA solution exists for these constraints:\n\nsimpleHumanist -> [a is obtuseAvailability, a.x < 18]\napproximateBounce -> [b is creamyMean, b.x <= 62]\nirregularLacrosse(x) -> [a is obtuseAvailability, b is creamyMean, x = max(a.x, b.x)]\ncompletePrint -> [m is irregularLacrosse, m.x <= 34]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8937, y = x + 695. C(y) :- A(x), x > 7304, y = x - 6042. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(7305) B(8000) C(1263)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8937 and where x > 7304. The original model has one A(x), and x can be solved with A(7305) B(8000) C(1263)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain centralStrategy { rosyIntersection ::= new (x : Integer). nutritiousBuyer ::= new (x : Integer). gourmetFrame ::= (x : Integer). flatBarracuda :- a is rosyIntersection, a.x >= 24. simpleEmbed :- b is nutritiousBuyer, b.x > 0. gourmetFrame(x) :- a is rosyIntersection, b is nutritiousBuyer, x = max(a.x, b.x). metalRequest :- m is gourmetFrame, m.x > 40. conforms flatBarracuda. conforms simpleEmbed. conforms metalRequest. } partial model blueFrequency of centralStrategy { a is rosyIntersection(x). b is nutritiousBuyer(y). } , rosyIntersection(41), nutritiousBuyer(41), gourmetFrame(41)",
+        "output": "This model is solvable because of the conformity of the following rules [flatBarracuda, simpleEmbed, metalRequest].\nA solution exists for these constraints:\n\nflatBarracuda -> [a is rosyIntersection, a.x >= 24]\nsimpleEmbed -> [b is nutritiousBuyer, b.x > 0]\ngourmetFrame(x) -> [a is rosyIntersection, b is nutritiousBuyer, x = max(a.x, b.x)]\nmetalRequest -> [m is gourmetFrame, m.x > 40]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 233.79, y = x - 9123.59. C(y) :- A(x), x >= 1498.37, y = x + 9044.35. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 912359/100) C(x + 180887/20)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 233.79. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 1498.37. The original model contains only one A(x), and x cannot be both <= 233.79 and >= 1498.37."
+        "instruction": "This formula file is solvable because",
+        "input": "domain sunnyRadian { mediumMeasure ::= new (x : Integer). edibleMonitor ::= new (x : Integer). Elaborate ::= (x : Integer). bruteTrumpet :- a is mediumMeasure, a.x <= -79. Salmon :- b is edibleMonitor, b.x <= -54. Elaborate(x) :- a is mediumMeasure, b is edibleMonitor, x = max(a.x, b.x). orientedInline :- m is Elaborate, m.x >= -76. conforms bruteTrumpet. conforms Salmon. conforms orientedInline. } partial model tartEmerald of sunnyRadian { a is mediumMeasure(x). b is edibleMonitor(y). } , mediumMeasure(-79), edibleMonitor(-54), Elaborate(-54)",
+        "output": "This model is solvable because of the conformity of the following rules [bruteTrumpet, Salmon, orientedInline].\nA solution exists for these constraints:\n\nbruteTrumpet -> [a is mediumMeasure, a.x <= -79]\nSalmon -> [b is edibleMonitor, b.x <= -54]\nElaborate(x) -> [a is mediumMeasure, b is edibleMonitor, x = max(a.x, b.x)]\norientedInline -> [m is Elaborate, m.x >= -76]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 9671.6, y = x + 8658.26. C(y) :- A(x), x > 8582.44, y = x - 5509.53. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(214586/25) B(172417/10) C(307391/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 9671.6 and where x > 8582.44. The original model has one A(x), and x can be solved with A(214586/25) B(172417/10) C(307391/100)."
+        "instruction": "Why is this model solvable?",
+        "input": "domain Sharp { eitherStation ::= new (x : Integer). medianBox ::= new (x : Integer). grimClearance ::= (x : Integer). champagneTouch :- a is eitherStation, a.x < -30. Succulent :- b is medianBox, b.x < 21. grimClearance(x) :- a is eitherStation, b is medianBox, x = max(a.x, b.x). Perpendicular :- m is grimClearance, m.x <= 89. conforms champagneTouch. conforms Succulent. conforms Perpendicular. } partial model Compact of Sharp { a is eitherStation(x). b is medianBox(y). } , eitherStation(-31), medianBox(0), grimClearance(0)",
+        "output": "This model is solvable because of the conformity of the following rules [champagneTouch, Succulent, Perpendicular].\nA solution exists for these constraints:\n\nchampagneTouch -> [a is eitherStation, a.x < -30]\nSucculent -> [b is medianBox, b.x < 21]\ngrimClearance(x) -> [a is eitherStation, b is medianBox, x = max(a.x, b.x)]\nPerpendicular -> [m is grimClearance, m.x <= 89]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 2137.44, y = x - 6821.7. C(y) :- A(x), x >= 8079.34, y = x + 4225.82. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 68217/10) C(x + 211291/50)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 2137.44. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 8079.34. The original model contains only one A(x), and x cannot be both <= 2137.44 and >= 8079.34."
+        "instruction": "What is the conflicts in this model?",
+        "input": "domain Rectilinear\n{\n  Generous ::= new (x : Integer).\n  Kind ::= new (x : Integer).\n\n  Adiabatic ::= (x : Integer).\n\n  Undirected :- a is Generous, a.x < -48.\n  Savory :- b is Kind, b.x > -81.\n\n  Adiabatic(x) :- a is Generous, b is Kind, x = max(a.x, b.x).\n  \n  cornAnalog :- m is Adiabatic, m.x <= -91.\n  \n  conforms Undirected.\n  conforms Savory.\n  conforms cornAnalog.\n}\n\npartial model creamyGrowth of Rectilinear\n{\n  a is Generous(x).\n  b is Kind(y).\n}\n, cornAnalog, Savory",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Undirected, Savory, cornAnalog].\nConflicts exist in these constraints:\n\ncornAnalog -> [m is Adiabatic, m.x <= -91]\nSavory -> [b is Kind, b.x > -81]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 49, y = x - 5896. C(y) :- A(x), x >= 4303, y = x + 5625. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(4303) B(-1593) C(9928)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 49 and where x >= 4303. The original model has one A(x), and x can be solved with A(4303) B(-1593) C(9928)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Chewy { Shy ::= new (w: Integer, Right: Integer). Piquant ::= (w: Integer, Right: Integer). Livid ::= (Integer, Integer). Livid(w, Right) :- Shy(w, Right), c = count({ t | t is Piquant, t.w <= t.Right}), c > -31. Piquant(w, Right) :- Shy(w, Right). Piquant(Right, w) :- Piquant(w, Right), w > Right. conforms Livid(a, b). } partial model plasticWrap of Chewy { Shy(a, b). }, Shy(0, 0), Piquant(0, 0), Livid(0, 0)",
+        "output": "This model is solvable because of the conformity of the following rules [Livid(a, b)].\nA solution exists for these constraints:\n\nLivid(w, Right) -> [Shy(w, Right), c = count({ t | t is Piquant, t.w <= t.Right}), c > -31]\nPiquant(w, Right) -> [Shy(w, Right)]\nPiquant(Right, w) -> [Piquant(w, Right), w > Right]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 4782, y = x - 7208. C(y) :- A(x), x > 3854, y = x + 3743. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3855) B(-3353) C(7598)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 4782 and where x > 3854. The original model has one A(x), and x can be solved with A(3855) B(-3353) C(7598)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Sparse { Knurled ::= new (w: Integer, Antique: Integer). Smoky ::= (w: Integer, Antique: Integer). emeraldTabby ::= (Integer, Integer). emeraldTabby(w, Antique) :- Knurled(w, Antique), c = count({ t | t is Smoky, t.w <= t.Antique}), c <= 10. Smoky(w, Antique) :- Knurled(w, Antique). Smoky(Antique, w) :- Smoky(w, Antique), w > Antique. conforms emeraldTabby(a, b). } partial model Binding of Sparse { Knurled(a, b). }, Knurled(0, 0), Smoky(0, 0), emeraldTabby(0, 0)",
+        "output": "This model is solvable because of the conformity of the following rules [emeraldTabby(a, b)].\nA solution exists for these constraints:\n\nemeraldTabby(w, Antique) -> [Knurled(w, Antique), c = count({ t | t is Smoky, t.w <= t.Antique}), c <= 10]\nSmoky(w, Antique) -> [Knurled(w, Antique)]\nSmoky(Antique, w) -> [Smoky(w, Antique), w > Antique]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1700, y = x + 8050. C(y) :- A(x), x <= 3137, y = x - 8885. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(8050) C(-8885)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 1700 and where x <= 3137. The original model has one A(x), and x can be solved with A(0) B(8050) C(-8885)."
+        "instruction": "Given a formula file, why is it unsolvable?",
+        "input": "domain Simple\n{\n  A ::= new (id: Integer).\n  B ::= (id : Integer).\n  C ::= (id : Integer).\n\n  B(y) :- A(x), x > 0, y = x - 1.\n  C(y) :- A(x), x < 0, y = x - 1.\n  goodModel :- B(x).\n  badModel :- C(x).\n \n  conforms goodModel, badModel.\n}\n\npartial model pm of Simple\n{\n  A(x).\n}, goodModel, badModel, B(, C(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [goodModel, badModel].\nConflicts exist in these constraints:\n\ngoodModel -> [B(x)]\nbadModel -> [C(x)]\nB(y) -> [A(x), x > 0, y = x - 1]\nC(y) -> [A(x), x < 0, y = x - 1]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5117.87, y = x - 6312.54. C(y) :- A(x), x >= 6888.79, y = x + 8312.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 315627/50) C(x + 166249/20)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 5117.87. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6888.79. The original model contains only one A(x), and x cannot be both <= 5117.87 and >= 6888.79."
+        "instruction": "What is the solution?",
+        "input": "domain zestyBibliography { grouchyDecision ::= new (id: Integer). promptDegree ::= (id : Integer). resolvingTrim ::= (id : Integer). promptDegree(y) :- grouchyDecision(x), x < -88, y = x - 1. resolvingTrim(y) :- grouchyDecision(x), x <= -12, y = x - 1. muffledContrast :- promptDegree(x). goldLevel :- resolvingTrim(x). conforms muffledContrast, goldLevel. } partial model meekReflection of zestyBibliography { grouchyDecision(x). }, grouchyDecision(-89), promptDegree(-90), resolvingTrim(-90)",
+        "output": "This model is solvable because of the conformity of the following rules [muffledContrast, goldLevel].\nA solution exists for these constraints:\n\npromptDegree(y) -> [grouchyDecision(x), x < -88, y = x - 1]\nresolvingTrim(y) -> [grouchyDecision(x), x <= -12, y = x - 1]\nmuffledContrast -> [promptDegree(x)]\ngoldLevel -> [resolvingTrim(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 4590, y = x + 1055. C(y) :- A(x), x >= 644, y = x - 1598. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(644) B(1699) C(-954)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 4590 and where x >= 644. The original model has one A(x), and x can be solved with A(644) B(1699) C(-954)."
+        "instruction": "The following model is not solvable. Why?",
+        "input": "domain Amber\n{\n  Slow ::= new (id: Integer).\n  auburnCheese ::= (id : Integer).\n  elegantUnion ::= (id : Integer).\n\n  auburnCheese(y) :- Slow(x), x > -64, y = x - 1.\n  elegantUnion(y) :- Slow(x), x < -99, y = x - 1.\n  Null :- auburnCheese(x).\n  ferociousLeadership :- elegantUnion(x).\n \n  conforms Null, ferociousLeadership.\n}\n\npartial model boomingChardonnay of Amber\n{\n  Slow(x).\n}, ferociousLeadership, Null, elegantUnion(, auburnCheese(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Null, ferociousLeadership].\nConflicts exist in these constraints:\n\nferociousLeadership -> [elegantUnion(x)]\nNull -> [auburnCheese(x)]\nelegantUnion(y) -> [Slow(x), x < -99, y = x - 1]\nauburnCheese(y) -> [Slow(x), x > -64, y = x - 1]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8628, y = x + 6204. C(y) :- A(x), x <= 932, y = x - 1096. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(6204) C(-1096)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 8628 and where x <= 932. The original model has one A(x), and x can be solved with A(0) B(6204) C(-1096)."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain flashedRoad { icyStrait ::= new (id: Integer). citronSpread ::= (id : Integer). simpleCharlie ::= (id : Integer). citronSpread(y) :- icyStrait(x), x <= -26, y = x - 1. simpleCharlie(y) :- icyStrait(x), x <= -10, y = x - 1. Cold :- citronSpread(x). frigidProducer :- simpleCharlie(x). conforms Cold, frigidProducer. } partial model Concave of flashedRoad { icyStrait(x). }, icyStrait(-26), citronSpread(-27), simpleCharlie(-27)",
+        "output": "This model is solvable because of the conformity of the following rules [Cold, frigidProducer].\nA solution exists for these constraints:\n\ncitronSpread(y) -> [icyStrait(x), x <= -26, y = x - 1]\nsimpleCharlie(y) -> [icyStrait(x), x <= -10, y = x - 1]\nCold -> [citronSpread(x)]\nfrigidProducer -> [simpleCharlie(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 7416.64, y = x + 3588.6. C(y) :- A(x), x < 6183.62, y = x - 5254.71. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 17943/5) C(x - 525471/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 7416.64. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 6183.62. The original model contains only one A(x), and x cannot be both > 7416.64 and < 6183.62."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain Isobaric { Sensitive ::= new (id: Integer). fixedPlanner ::= (id : Integer). grizzledCinnamon ::= (id : Integer). fixedPlanner(y) :- Sensitive(x), x >= -92, y = x - 1. grizzledCinnamon(y) :- Sensitive(x), x > -44, y = x - 1. pointedAllegory :- fixedPlanner(x). prestoBunk :- grizzledCinnamon(x). conforms pointedAllegory, prestoBunk. } partial model Large of Isobaric { Sensitive(x). }, Sensitive(0), fixedPlanner(-1), grizzledCinnamon(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [pointedAllegory, prestoBunk].\nA solution exists for these constraints:\n\nfixedPlanner(y) -> [Sensitive(x), x >= -92, y = x - 1]\ngrizzledCinnamon(y) -> [Sensitive(x), x > -44, y = x - 1]\npointedAllegory -> [fixedPlanner(x)]\nprestoBunk -> [grizzledCinnamon(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5771, y = x - 4349. C(y) :- A(x), x >= 2832, y = x + 5619. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5772) B(1423) C(11391)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 5771 and where x >= 2832. The original model has one A(x), and x can be solved with A(5772) B(1423) C(11391)."
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Poky { Saucy ::= new (id: Integer). Planar ::= (id : Integer). grayRower ::= (id : Integer). Planar(y) :- Saucy(x), x >= -44, y = x - 1. grayRower(y) :- Saucy(x), x >= -53, y = x - 1. Warm :- Planar(x). overcastShim :- grayRower(x). conforms Warm, overcastShim. } partial model endothermicKestrel of Poky { Saucy(x). }, Saucy(0), Planar(-1), grayRower(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [Warm, overcastShim].\nA solution exists for these constraints:\n\nPlanar(y) -> [Saucy(x), x >= -44, y = x - 1]\ngrayRower(y) -> [Saucy(x), x >= -53, y = x - 1]\nWarm -> [Planar(x)]\novercastShim -> [grayRower(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 2794.3, y = x - 3045.04. C(y) :- A(x), x < 1928.61, y = x + 742.96. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 76126/25) C(x + 18574/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 2794.3. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 1928.61. The original model contains only one A(x), and x cannot be both >= 2794.3 and < 1928.61."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain recentMargin { legatoTerrier ::= new (id: Integer). Glowing ::= (id : Integer). fullHead ::= (id : Integer). Glowing(y) :- legatoTerrier(x), x > 65, y = x - 1. fullHead(y) :- legatoTerrier(x), x > -89, y = x - 1. Ascent :- Glowing(x). rigidSidebar :- fullHead(x). conforms Ascent, rigidSidebar. } partial model Numerous of recentMargin { legatoTerrier(x). }, legatoTerrier(66), Glowing(65), fullHead(65)",
+        "output": "This model is solvable because of the conformity of the following rules [Ascent, rigidSidebar].\nA solution exists for these constraints:\n\nGlowing(y) -> [legatoTerrier(x), x > 65, y = x - 1]\nfullHead(y) -> [legatoTerrier(x), x > -89, y = x - 1]\nAscent -> [Glowing(x)]\nrigidSidebar -> [fullHead(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 996.72, y = x + 1699.8. C(y) :- A(x), x > 9898.43, y = x - 9147.43. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 8499/5) C(x - 914743/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 996.72. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9898.43. The original model contains only one A(x), and x cannot be both <= 996.72 and > 9898.43."
+        "instruction": "Solve the following model.",
+        "input": "domain Alternate { Merry ::= new (id: Integer). odiousMedian ::= (id : Integer). mutedValve ::= (id : Integer). odiousMedian(y) :- Merry(x), x < -96, y = x - 1. mutedValve(y) :- Merry(x), x < -5, y = x - 1. wiseCombination :- odiousMedian(x). Chewy :- mutedValve(x). conforms wiseCombination, Chewy. } partial model ancientFocus of Alternate { Merry(x). }, Merry(-97), odiousMedian(-98), mutedValve(-98)",
+        "output": "This model is solvable because of the conformity of the following rules [wiseCombination, Chewy].\nA solution exists for these constraints:\n\nodiousMedian(y) -> [Merry(x), x < -96, y = x - 1]\nmutedValve(y) -> [Merry(x), x < -5, y = x - 1]\nwiseCombination -> [odiousMedian(x)]\nChewy -> [mutedValve(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 6692.64, y = x + 3387.84. C(y) :- A(x), x < 111.75, y = x - 844.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 84696/25) C(x - 16889/20)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 6692.64. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 111.75. The original model contains only one A(x), and x cannot be both > 6692.64 and < 111.75."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain vividSwitch { immediateMerlot ::= new (id: Integer). Claret ::= (id : Integer). agedOctree ::= (id : Integer). Claret(y) :- immediateMerlot(x), x > 45, y = x - 1. agedOctree(y) :- immediateMerlot(x), x > 5, y = x - 1. blisteringShip :- Claret(x). minimumGrunt :- agedOctree(x). conforms blisteringShip, minimumGrunt. } partial model Deafening of vividSwitch { immediateMerlot(x). }, immediateMerlot(46), Claret(45), agedOctree(45)",
+        "output": "This model is solvable because of the conformity of the following rules [blisteringShip, minimumGrunt].\nA solution exists for these constraints:\n\nClaret(y) -> [immediateMerlot(x), x > 45, y = x - 1]\nagedOctree(y) -> [immediateMerlot(x), x > 5, y = x - 1]\nblisteringShip -> [Claret(x)]\nminimumGrunt -> [agedOctree(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 2028, y = x + 632. C(y) :- A(x), x < 7722, y = x - 5691. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2028) B(2660) C(-3663)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 2028 and where x < 7722. The original model has one A(x), and x can be solved with A(2028) B(2660) C(-3663)."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain rectilinearCliche { seasonedHead ::= new (id: Integer). Amicable ::= (id : Integer). brassVerbiage ::= (id : Integer). Amicable(y) :- seasonedHead(x), x > -73, y = x - 1. brassVerbiage(y) :- seasonedHead(x), x > -13, y = x - 1. Buttery :- Amicable(x). saltyAngora :- brassVerbiage(x). conforms Buttery, saltyAngora. } partial model Woolen of rectilinearCliche { seasonedHead(x). }, seasonedHead(0), Amicable(-1), brassVerbiage(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [Buttery, saltyAngora].\nA solution exists for these constraints:\n\nAmicable(y) -> [seasonedHead(x), x > -73, y = x - 1]\nbrassVerbiage(y) -> [seasonedHead(x), x > -13, y = x - 1]\nButtery -> [Amicable(x)]\nsaltyAngora -> [brassVerbiage(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 1972.04, y = x + 23.78. C(y) :- A(x), x > 6605.31, y = x - 9508.73. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 1189/50) C(x - 950873/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1972.04. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 6605.31. The original model contains only one A(x), and x cannot be both <= 1972.04 and > 6605.31."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain SymbolicOr { A ::= new (x : Boolean). B ::= new (x : Boolean). OrValue ::= (x : Boolean). OrValue(x) :- a is A, b is B, x = or(a.x, b.x). goodModel :- OrValue(x), x = FALSE. conforms goodModel. } partial model pm of SymbolicOr { a is A(x). b is B(y). } , A(FALSE), B(FALSE), OrValue(FALSE)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\nOrValue(x) -> [a is A, b is B, x = or(a.x, b.x)]\ngoodModel -> [OrValue(x), x = FALSE]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6938, y = x + 3916. C(y) :- A(x), x <= 9184, y = x - 7327. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(3916) C(-7327)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 6938 and where x <= 9184. The original model has one A(x), and x can be solved with A(0) B(3916) C(-7327)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Tan { orthogonalLayout ::= new (x : Boolean). Noisy ::= new (x : Boolean). quickInterval ::= (x : Boolean). quickInterval(x) :- a is orthogonalLayout, b is Noisy, x = or(a.x, b.x). resonntPromo :- quickInterval(x), x = broadLumen. conforms resonntPromo. } partial model bitterOffense of Tan { a is orthogonalLayout(x). b is Noisy(y). } , orthogonalLayout(TRUE), Noisy(TRUE), quickInterval(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [resonntPromo].\nA solution exists for these constraints:\n\nquickInterval(x) -> [a is orthogonalLayout, b is Noisy, x = or(a.x, b.x)]\nresonntPromo -> [quickInterval(x), x = broadLumen]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 7673, y = x + 7959. C(y) :- A(x), x >= 8255, y = x - 4504. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8255) B(16214) C(3751)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 7673 and where x >= 8255. The original model has one A(x), and x can be solved with A(8255) B(16214) C(3751)."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain undecidableStock { dynamicSpecular ::= new (x : Boolean). Glossy ::= new (x : Boolean). rosyLearning ::= (x : Boolean). rosyLearning(x) :- a is dynamicSpecular, b is Glossy, x = or(a.x, b.x). oilyHub :- rosyLearning(x), x = Simple. conforms oilyHub. } partial model Chalky of undecidableStock { a is dynamicSpecular(x). b is Glossy(y). } , dynamicSpecular(TRUE), Glossy(TRUE), rosyLearning(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [oilyHub].\nA solution exists for these constraints:\n\nrosyLearning(x) -> [a is dynamicSpecular, b is Glossy, x = or(a.x, b.x)]\noilyHub -> [rosyLearning(x), x = Simple]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5457, y = x - 8561. C(y) :- A(x), x <= 7480, y = x + 3488. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5457) B(-3104) C(8945)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 5457 and where x <= 7480. The original model has one A(x), and x can be solved with A(5457) B(-3104) C(8945)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain politePrism { Human ::= new (x : Boolean). Big ::= new (x : Boolean). religiousEnfilade ::= (x : Boolean). religiousEnfilade(x) :- a is Human, b is Big, x = or(a.x, b.x). Eager :- religiousEnfilade(x), x = Frigid. conforms Eager. } partial model Radioactive of politePrism { a is Human(x). b is Big(y). } , Human(TRUE), Big(TRUE), religiousEnfilade(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Eager].\nA solution exists for these constraints:\n\nreligiousEnfilade(x) -> [a is Human, b is Big, x = or(a.x, b.x)]\nEager -> [religiousEnfilade(x), x = Frigid]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 7656, y = x - 6092. C(y) :- A(x), x >= 3682, y = x + 7824. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3682) B(-2410) C(11506)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 7656 and where x >= 3682. The original model has one A(x), and x can be solved with A(3682) B(-2410) C(11506)."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain freshInformation { rosyLeg ::= new (x : Boolean). Crunchy ::= new (x : Boolean). nippyOpportunity ::= (x : Boolean). nippyOpportunity(x) :- a is rosyLeg, b is Crunchy, x = or(a.x, b.x). Average :- nippyOpportunity(x), x = Dichotomic. conforms Average. } partial model Archaic of freshInformation { a is rosyLeg(x). b is Crunchy(y). } , rosyLeg(TRUE), Crunchy(TRUE), nippyOpportunity(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Average].\nA solution exists for these constraints:\n\nnippyOpportunity(x) -> [a is rosyLeg, b is Crunchy, x = or(a.x, b.x)]\nAverage -> [nippyOpportunity(x), x = Dichotomic]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6733, y = x + 2867. C(y) :- A(x), x >= 4427, y = x - 8742. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(4427) B(7294) C(-4315)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 6733 and where x >= 4427. The original model has one A(x), and x can be solved with A(4427) B(7294) C(-4315)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Short { Trusting ::= new (x : Boolean). Metallic ::= new (x : Boolean). Mild ::= (x : Boolean). Mild(x) :- a is Trusting, b is Metallic, x = or(a.x, b.x). nutritiousLion :- Mild(x), x = stoneSherry. conforms nutritiousLion. } partial model Courtly of Short { a is Trusting(x). b is Metallic(y). } , Trusting(TRUE), Metallic(TRUE), Mild(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [nutritiousLion].\nA solution exists for these constraints:\n\nMild(x) -> [a is Trusting, b is Metallic, x = or(a.x, b.x)]\nnutritiousLion -> [Mild(x), x = stoneSherry]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 8774.75, y = x - 7344.94. C(y) :- A(x), x <= 2767.17, y = x + 6390.66. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 367247/50) C(x + 319533/50)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 8774.75. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2767.17. The original model contains only one A(x), and x cannot be both > 8774.75 and <= 2767.17."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain navyCorrelation { Cheerful ::= new (x : Boolean). Metallic ::= new (x : Boolean). succulentRecurrence ::= (x : Boolean). succulentRecurrence(x) :- a is Cheerful, b is Metallic, x = or(a.x, b.x). Stubborn :- succulentRecurrence(x), x = rankCheddar. conforms Stubborn. } partial model leadSmoke of navyCorrelation { a is Cheerful(x). b is Metallic(y). } , Cheerful(TRUE), Metallic(TRUE), succulentRecurrence(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Stubborn].\nA solution exists for these constraints:\n\nsucculentRecurrence(x) -> [a is Cheerful, b is Metallic, x = or(a.x, b.x)]\nStubborn -> [succulentRecurrence(x), x = rankCheddar]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 8267, y = x + 3456. C(y) :- A(x), x <= 4413, y = x - 4649. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(3456) C(-4649)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 8267 and where x <= 4413. The original model has one A(x), and x can be solved with A(0) B(3456) C(-4649)."
+        "instruction": "This formula file is solvable because",
+        "input": "domain complexSwatch { bigCistern ::= new (x : Boolean). frostySledder ::= new (x : Boolean). Obsolete ::= (x : Boolean). Obsolete(x) :- a is bigCistern, b is frostySledder, x = or(a.x, b.x). objectiveDelta :- Obsolete(x), x = internalConduction. conforms objectiveDelta. } partial model Wide of complexSwatch { a is bigCistern(x). b is frostySledder(y). } , bigCistern(TRUE), frostySledder(TRUE), Obsolete(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [objectiveDelta].\nA solution exists for these constraints:\n\nObsolete(x) -> [a is bigCistern, b is frostySledder, x = or(a.x, b.x)]\nobjectiveDelta -> [Obsolete(x), x = internalConduction]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 3703.12, y = x + 9039.66. C(y) :- A(x), x >= 8010.19, y = x - 5544.06. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 451983/50) C(x - 277203/50)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 3703.12. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 8010.19. The original model contains only one A(x), and x cannot be both < 3703.12 and >= 8010.19."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain ceruleanAbbey { Metallic ::= new (x : Boolean). expressAgent ::= new (x : Boolean). Citron ::= (x : Boolean). Citron(x) :- a is Metallic, b is expressAgent, x = or(a.x, b.x). Icy :- Citron(x), x = Respectful. conforms Icy. } partial model fixedExpense of ceruleanAbbey { a is Metallic(x). b is expressAgent(y). } , Metallic(TRUE), expressAgent(TRUE), Citron(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Icy].\nA solution exists for these constraints:\n\nCitron(x) -> [a is Metallic, b is expressAgent, x = or(a.x, b.x)]\nIcy -> [Citron(x), x = Respectful]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 9791.67, y = x + 6797.14. C(y) :- A(x), x > 6746.31, y = x - 5012.17. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(674731/100) B(270889/20) C(86757/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 9791.67 and where x > 6746.31. The original model has one A(x), and x can be solved with A(674731/100) B(270889/20) C(86757/50)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain SymbolicAggregation { Component ::= new (id: Integer, utilization: Real). Processor ::= new (id: Integer). Mapping ::= new (c: Component, p: Processor). ExtComponent ::= (id: Integer, utilization: Real). ExtComponent(x, y) :- Component(x, y), y > 45, y < 55. badMapping :- p is Processor, s = sum(0.0, { c.utilization | c is Component, Mapping(c, p) }), s > 100. goodModel :- c = count({ p | p is ExtComponent(x, y)}), c = 2. conforms goodModel. conforms no badMapping. } partial model pm of SymbolicAggregation { c0 is Component(0, x). c1 is Component(1, y). p0 is Processor(0). p1 is Processor(1). Mapping(c0, p0). Mapping(c1, p0). } , Processor(0), Processor(1), Component(0, 46), Component(1, 46), Mapping(Component(0, 46), Processor(0)), Mapping(Component(1, 46), Processor(0)), ExtComponent(0, 46), ExtComponent(1, 46)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel, no badMapping].\nA solution exists for these constraints:\n\nExtComponent(x, y) -> [Component(x, y), y > 45, y < 55]\nbadMapping -> [p is Processor, s = sum(0.0, { c.utilization | c is Component, Mapping(c, p) }), s > 100]\ngoodModel -> [c = count({ p | p is ExtComponent(x, y)}), c = 2]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 1491, y = x - 5317. C(y) :- A(x), x >= 7009, y = x + 3864. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5317) C(x + 3864)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 1491. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 7009. The original model contains only one A(x), and x cannot be both <= 1491 and >= 7009."
+        "instruction": "Explain the conflicts in the following model.",
+        "input": "domain nullStrain\n{\n  Concrete ::= new (id: Integer, utilization: Real).\n  tallBond ::= new (id: Integer).\n  Freezing   ::= new (c: Concrete, p: tallBond).\n  \n  juicyAtmosphere ::= (id: Integer, utilization: Real).\n  juicyAtmosphere(x, y) :- Concrete(x, y), y <= 7, y > -100.\n  \n  Clean :- p is tallBond,\n                s = sum(0.0, { c.utilization | \n                    c is Concrete, Freezing(c, p) }), s >= -38.\n\n  Spatial :- c = count({ p | p is juicyAtmosphere(x, y)}), c <= 40.\n\n  conforms Spatial.\n  conforms no Clean.\n}\n\npartial model affableScallop of nullStrain\n{\n  c0 is Concrete(0, x).\n  c1 is Concrete(1, y).\n  p0 is tallBond(0).\n  p1 is tallBond(1).\n  Freezing(c0, p0).\n  Freezing(c1, p0).\n}\n, Clean, tallBond(, tallBond(, Concrete(, Concrete(, Freezing(, Concrete(, tallBond(, Freezing(, Concrete(, tallBond(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Spatial, no Clean].\nConflicts exist in these constraints:\n\nClean -> [p is tallBond, s = sum(0.0, { c.utilization | c is Concrete, Freezing(c, p) }), s >= -38]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 864, y = x + 8108. C(y) :- A(x), x > 8369, y = x - 628. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 8108) C(x - 628)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 864. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 8369. The original model contains only one A(x), and x cannot be both < 864 and > 8369."
+        "instruction": "Given a formula file, why is it unsolvable?",
+        "input": "domain fatSquare\n{\n  Yummy ::= new (id: Integer, utilization: Real).\n  Crunchy ::= new (id: Integer).\n  Balanced   ::= new (c: Yummy, p: Crunchy).\n  \n  Icy ::= (id: Integer, utilization: Real).\n  Icy(x, y) :- Yummy(x, y), y >= 96, y <= 43.\n  \n  matchingClique :- p is Crunchy,\n                s = sum(0.0, { c.utilization | \n                    c is Yummy, Balanced(c, p) }), s < 32.\n\n  icyMango :- c = count({ p | p is Icy(x, y)}), c > 52.\n\n  conforms icyMango.\n  conforms no matchingClique.\n}\n\npartial model Poached of fatSquare\n{\n  c0 is Yummy(0, x).\n  c1 is Yummy(1, y).\n  p0 is Crunchy(0).\n  p1 is Crunchy(1).\n  Balanced(c0, p0).\n  Balanced(c1, p0).\n}\n, matchingClique, Crunchy(, Crunchy(, Yummy(, Yummy(, Balanced(, Yummy(, Crunchy(, Balanced(, Yummy(, Crunchy(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [icyMango, no matchingClique].\nConflicts exist in these constraints:\n\nmatchingClique -> [p is Crunchy, s = sum(0.0, { c.utilization | c is Yummy, Balanced(c, p) }), s < 32]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5752, y = x - 6763. C(y) :- A(x), x <= 8870, y = x + 8275. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5752) B(-1011) C(14027)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 5752 and where x <= 8870. The original model has one A(x), and x can be solved with A(5752) B(-1011) C(14027)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain lividPly { goldPerformance ::= new (id: Integer, utilization: Real). Regional ::= new (id: Integer). parallelRoad ::= new (c: goldPerformance, p: Regional). Large ::= (id: Integer, utilization: Real). Large(x, y) :- goldPerformance(x, y), y > 27, y <= -69. silverCongruence :- p is Regional, s = sum(0.0, { c.utilization | c is goldPerformance, parallelRoad(c, p) }), s >= 11. activeAssistant :- c = count({ p | p is Large(x, y)}), c < 29. conforms activeAssistant. conforms no silverCongruence. } partial model vibratoAvailability of lividPly { c0 is goldPerformance(0, x). c1 is goldPerformance(1, y). p0 is Regional(0). p1 is Regional(1). parallelRoad(c0, p0). parallelRoad(c1, p0). } , Regional(0), Regional(1), goldPerformance(0, 0), goldPerformance(1, 0), parallelRoad(goldPerformance(0, 0), Regional(0)), parallelRoad(goldPerformance(1, 0), Regional(0))",
+        "output": "This model is solvable because of the conformity of the following rules [activeAssistant, no silverCongruence].\nA solution exists for these constraints:\n\nLarge(x, y) -> [goldPerformance(x, y), y > 27, y <= -69]\nsilverCongruence -> [p is Regional, s = sum(0.0, { c.utilization | c is goldPerformance, parallelRoad(c, p) }), s >= 11]\nactiveAssistant -> [c = count({ p | p is Large(x, y)}), c < 29]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 6202.27, y = x + 3827.03. C(y) :- A(x), x >= 3482.2, y = x - 5111.79. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(620327/100) B(100303/10) C(27287/25)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 6202.27 and where x >= 3482.2. The original model has one A(x), and x can be solved with A(620327/100) B(100303/10) C(27287/25)."
+        "instruction": "What is the conflicts in this model?",
+        "input": "domain coolTransit\n{\n  Faint ::= new (id: Integer, utilization: Real).\n  crabbySample ::= new (id: Integer).\n  lightFalloff   ::= new (c: Faint, p: crabbySample).\n  \n  agileShoulder ::= (id: Integer, utilization: Real).\n  agileShoulder(x, y) :- Faint(x, y), y < 39, y >= -79.\n  \n  crunchyScript :- p is crabbySample,\n                s = sum(0.0, { c.utilization | \n                    c is Faint, lightFalloff(c, p) }), s >= -63.\n\n  Claret :- c = count({ p | p is agileShoulder(x, y)}), c >= -71.\n\n  conforms Claret.\n  conforms no crunchyScript.\n}\n\npartial model Chocolate of coolTransit\n{\n  c0 is Faint(0, x).\n  c1 is Faint(1, y).\n  p0 is crabbySample(0).\n  p1 is crabbySample(1).\n  lightFalloff(c0, p0).\n  lightFalloff(c1, p0).\n}\n, crunchyScript, crabbySample(, crabbySample(, Faint(, Faint(, lightFalloff(, Faint(, crabbySample(, lightFalloff(, Faint(, crabbySample(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Claret, no crunchyScript].\nConflicts exist in these constraints:\n\ncrunchyScript -> [p is crabbySample, s = sum(0.0, { c.utilization | c is Faint, lightFalloff(c, p) }), s >= -63]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3299.82, y = x - 2162.38. C(y) :- A(x), x < 3914.7, y = x + 9438.54. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(165041/50) B(28461/25) C(318484/25)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 3299.82 and where x < 3914.7. The original model has one A(x), and x can be solved with A(165041/50) B(28461/25) C(318484/25)."
+        "instruction": "This formula file is not solvable because",
+        "input": "domain Damaged\n{\n  Cool ::= new (id: Integer, utilization: Real).\n  friendlyCove ::= new (id: Integer).\n  directPoint   ::= new (c: Cool, p: friendlyCove).\n  \n  Plumb ::= (id: Integer, utilization: Real).\n  Plumb(x, y) :- Cool(x, y), y > 51, y <= 13.\n  \n  immediateDeterminant :- p is friendlyCove,\n                s = sum(0.0, { c.utilization | \n                    c is Cool, directPoint(c, p) }), s >= -46.\n\n  searingTuna :- c = count({ p | p is Plumb(x, y)}), c > -45.\n\n  conforms searingTuna.\n  conforms no immediateDeterminant.\n}\n\npartial model toastedDirector of Damaged\n{\n  c0 is Cool(0, x).\n  c1 is Cool(1, y).\n  p0 is friendlyCove(0).\n  p1 is friendlyCove(1).\n  directPoint(c0, p0).\n  directPoint(c1, p0).\n}\n, immediateDeterminant, friendlyCove(, friendlyCove(, Cool(, Cool(, directPoint(, Cool(, friendlyCove(, directPoint(, Cool(, friendlyCove(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [searingTuna, no immediateDeterminant].\nConflicts exist in these constraints:\n\nimmediateDeterminant -> [p is friendlyCove, s = sum(0.0, { c.utilization | c is Cool, directPoint(c, p) }), s >= -46]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 1883, y = x - 3695. C(y) :- A(x), x > 5945, y = x + 1210. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 3695) C(x + 1210)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 1883. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 5945. The original model contains only one A(x), and x cannot be both < 1883 and > 5945."
+        "instruction": "What is the conflicts?",
+        "input": "domain goldenWavelength\n{\n  Intense ::= new (id: Integer, utilization: Real).\n  Exhaustive ::= new (id: Integer).\n  Frosty   ::= new (c: Intense, p: Exhaustive).\n  \n  Coral ::= (id: Integer, utilization: Real).\n  Coral(x, y) :- Intense(x, y), y <= 23, y >= 9.\n  \n  rowdyCorduroy :- p is Exhaustive,\n                s = sum(0.0, { c.utilization | \n                    c is Intense, Frosty(c, p) }), s <= 41.\n\n  Brass :- c = count({ p | p is Coral(x, y)}), c < 82.\n\n  conforms Brass.\n  conforms no rowdyCorduroy.\n}\n\npartial model absoluteVoice of goldenWavelength\n{\n  c0 is Intense(0, x).\n  c1 is Intense(1, y).\n  p0 is Exhaustive(0).\n  p1 is Exhaustive(1).\n  Frosty(c0, p0).\n  Frosty(c1, p0).\n}\n, rowdyCorduroy, Exhaustive(, Exhaustive(, Intense(, Intense(, Frosty(, Intense(, Exhaustive(, Frosty(, Intense(, Exhaustive(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Brass, no rowdyCorduroy].\nConflicts exist in these constraints:\n\nrowdyCorduroy -> [p is Exhaustive, s = sum(0.0, { c.utilization | c is Intense, Frosty(c, p) }), s <= 41]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 7512.32, y = x + 2085.49. C(y) :- A(x), x >= 4324.31, y = x - 4004.18. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(432431/100) B(32049/5) C(32013/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 7512.32 and where x >= 4324.31. The original model has one A(x), and x can be solved with A(432431/100) B(32049/5) C(32013/100)."
+        "instruction": "Explain why this model is not solvable.",
+        "input": "domain Ecru\n{\n  Rainy ::= new (id: Integer, utilization: Real).\n  orderedDarter ::= new (id: Integer).\n  Sophisticated   ::= new (c: Rainy, p: orderedDarter).\n  \n  Golden ::= (id: Integer, utilization: Real).\n  Golden(x, y) :- Rainy(x, y), y < 28, y < 60.\n  \n  Amicable :- p is orderedDarter,\n                s = sum(0.0, { c.utilization | \n                    c is Rainy, Sophisticated(c, p) }), s > 18.\n\n  fullProvolone :- c = count({ p | p is Golden(x, y)}), c > 31.\n\n  conforms fullProvolone.\n  conforms no Amicable.\n}\n\npartial model Sluggish of Ecru\n{\n  c0 is Rainy(0, x).\n  c1 is Rainy(1, y).\n  p0 is orderedDarter(0).\n  p1 is orderedDarter(1).\n  Sophisticated(c0, p0).\n  Sophisticated(c1, p0).\n}\n, fullProvolone",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [fullProvolone, no Amicable].\nConflicts exist in these constraints:\n\nfullProvolone -> [c = count({ p | p is Golden(x, y)}), c > 31]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x >= 246.41, y = x - 4301.71. C(y) :- A(x), x <= 898.56, y = x + 5111.58. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(24641/100) B(-40553/10) C(535799/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 246.41 and where x <= 898.56. The original model has one A(x), and x can be solved with A(24641/100) B(-40553/10) C(535799/100)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Bordeaux { Other ::= new (id: Integer, utilization: Real). alternateZoning ::= new (id: Integer). Careful ::= new (c: Other, p: alternateZoning). camelSnipe ::= (id: Integer, utilization: Real). camelSnipe(x, y) :- Other(x, y), y < 75, y >= 99. Rich :- p is alternateZoning, s = sum(0.0, { c.utilization | c is Other, Careful(c, p) }), s >= 55. relativeCanity :- c = count({ p | p is camelSnipe(x, y)}), c <= 65. conforms relativeCanity. conforms no Rich. } partial model Blocking of Bordeaux { c0 is Other(0, x). c1 is Other(1, y). p0 is alternateZoning(0). p1 is alternateZoning(1). Careful(c0, p0). Careful(c1, p0). } , alternateZoning(0), alternateZoning(1), Other(0, 0), Other(1, 0), Careful(Other(0, 0), alternateZoning(0)), Careful(Other(1, 0), alternateZoning(0))",
+        "output": "This model is solvable because of the conformity of the following rules [relativeCanity, no Rich].\nA solution exists for these constraints:\n\ncamelSnipe(x, y) -> [Other(x, y), y < 75, y >= 99]\nRich -> [p is alternateZoning, s = sum(0.0, { c.utilization | c is Other, Careful(c, p) }), s >= 55]\nrelativeCanity -> [c = count({ p | p is camelSnipe(x, y)}), c <= 65]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 5199.86, y = x + 3069.67. C(y) :- A(x), x > 9574.97, y = x - 671.96. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 306967/100) C(x - 16799/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 5199.86. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9574.97. The original model contains only one A(x), and x cannot be both < 5199.86 and > 9574.97."
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain seethingFork { Great ::= new (id: Integer, utilization: Real). Green ::= new (id: Integer). violetGulf ::= new (c: Great, p: Green). Amortized ::= (id: Integer, utilization: Real). Amortized(x, y) :- Great(x, y), y < 48, y >= 48. richSpook :- p is Green, s = sum(0.0, { c.utilization | c is Great, violetGulf(c, p) }), s >= 39. Spicy :- c = count({ p | p is Amortized(x, y)}), c > -68. conforms Spicy. conforms no richSpook. } partial model broadFront of seethingFork { c0 is Great(0, x). c1 is Great(1, y). p0 is Green(0). p1 is Green(1). violetGulf(c0, p0). violetGulf(c1, p0). } , Green(0), Green(1), Great(0, 0), Great(1, 0), violetGulf(Great(0, 0), Green(0)), violetGulf(Great(1, 0), Green(0))",
+        "output": "This model is solvable because of the conformity of the following rules [Spicy, no richSpook].\nA solution exists for these constraints:\n\nAmortized(x, y) -> [Great(x, y), y < 48, y >= 48]\nrichSpook -> [p is Green, s = sum(0.0, { c.utilization | c is Great, violetGulf(c, p) }), s >= 39]\nSpicy -> [c = count({ p | p is Amortized(x, y)}), c > -68]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 5007, y = x - 2392. C(y) :- A(x), x <= 3935, y = x + 6618. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 2392) C(x + 6618)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 5007. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3935. The original model contains only one A(x), and x cannot be both >= 5007 and <= 3935."
+        "instruction": "Given a formula file, why is it unsolvable?",
+        "input": "domain Simple\n{\n  A ::= new (id: Integer).\n  B ::= (id: Integer).\n  C ::= (id: Integer).\n\n  B(x) :- A(x), x > 0.\n  C(x) :- A(x), x < 0.\n  \n  goodModel :- B(x).\n  badModel :- C(x).\n\n  conforms goodModel, badModel.\n}\n\npartial model pm of Simple\n{\n  A(x).\n}, goodModel, badModel, B(, C(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [goodModel, badModel].\nConflicts exist in these constraints:\n\ngoodModel -> [B(x)]\nbadModel -> [C(x)]\nB(x) -> [A(x), x > 0]\nC(x) -> [A(x), x < 0]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 9850, y = x - 8799. C(y) :- A(x), x >= 9718, y = x + 9076. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(9718) B(919) C(18794)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 9850 and where x >= 9718. The original model has one A(x), and x can be solved with A(9718) B(919) C(18794)."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain Violet { ironEmmentaler ::= new (id: Integer). honestBeam ::= (id: Integer). Crispy ::= (id: Integer). honestBeam(x) :- ironEmmentaler(x), x < -79. Crispy(x) :- ironEmmentaler(x), x < -100. Khaki :- honestBeam(x). Syrupy :- Crispy(x). conforms Khaki, Syrupy. } partial model redText of Violet { ironEmmentaler(x). }, ironEmmentaler(-101), honestBeam(-101), Crispy(-101)",
+        "output": "This model is solvable because of the conformity of the following rules [Khaki, Syrupy].\nA solution exists for these constraints:\n\nhonestBeam(x) -> [ironEmmentaler(x), x < -79]\nCrispy(x) -> [ironEmmentaler(x), x < -100]\nKhaki -> [honestBeam(x)]\nSyrupy -> [Crispy(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 9073.9, y = x - 7160.39. C(y) :- A(x), x <= 3530.74, y = x + 4652.92. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 716039/100) C(x + 116323/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 9073.9. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3530.74. The original model contains only one A(x), and x cannot be both > 9073.9 and <= 3530.74."
+        "instruction": "Give an explanation why this is not solvable.",
+        "input": "domain Stable\n{\n  ternaryDam ::= new (id: Integer).\n  Synchronic ::= (id: Integer).\n  Pointed ::= (id: Integer).\n\n  Synchronic(x) :- ternaryDam(x), x <= 1.\n  Pointed(x) :- ternaryDam(x), x >= 88.\n  \n  Chill :- Synchronic(x).\n  Mashed :- Pointed(x).\n\n  conforms Chill, Mashed.\n}\n\npartial model Distinct of Stable\n{\n  ternaryDam(x).\n}, Mashed, Chill, Pointed(, Synchronic(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Chill, Mashed].\nConflicts exist in these constraints:\n\nMashed -> [Pointed(x)]\nChill -> [Synchronic(x)]\nPointed(x) -> [ternaryDam(x), x >= 88]\nSynchronic(x) -> [ternaryDam(x), x <= 1]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 3180.45, y = x - 485.9. C(y) :- A(x), x >= 4027.47, y = x + 9210.39. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(402747/100) B(354157/100) C(661893/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 3180.45 and where x >= 4027.47. The original model has one A(x), and x can be solved with A(402747/100) B(354157/100) C(661893/50)."
+        "instruction": "Explain the conflicts in the following model.",
+        "input": "domain ebonyObject\n{\n  Upbeat ::= new (id: Integer).\n  Solid ::= (id: Integer).\n  Complicated ::= (id: Integer).\n\n  Solid(x) :- Upbeat(x), x <= -40.\n  Complicated(x) :- Upbeat(x), x >= -13.\n  \n  intricateRemoulade :- Solid(x).\n  Stubborn :- Complicated(x).\n\n  conforms intricateRemoulade, Stubborn.\n}\n\npartial model smokedRoll of ebonyObject\n{\n  Upbeat(x).\n}, intricateRemoulade, Stubborn, Solid(, Complicated(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [intricateRemoulade, Stubborn].\nConflicts exist in these constraints:\n\nintricateRemoulade -> [Solid(x)]\nStubborn -> [Complicated(x)]\nSolid(x) -> [Upbeat(x), x <= -40]\nComplicated(x) -> [Upbeat(x), x >= -13]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 4981.32, y = x + 5727.2. C(y) :- A(x), x <= 4120.97, y = x - 380.35. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 28636/5) C(x - 7607/20)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 4981.32. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 4120.97. The original model contains only one A(x), and x cannot be both > 4981.32 and <= 4120.97."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain khakiHint { Rowdy ::= new (id: Integer). chromaticCompressor ::= (id: Integer). Tender ::= (id: Integer). chromaticCompressor(x) :- Rowdy(x), x >= -79. Tender(x) :- Rowdy(x), x < 66. recentStem :- chromaticCompressor(x). darkOlympics :- Tender(x). conforms recentStem, darkOlympics. } partial model Vicious of khakiHint { Rowdy(x). }, Rowdy(0), chromaticCompressor(0), Tender(0)",
+        "output": "This model is solvable because of the conformity of the following rules [recentStem, darkOlympics].\nA solution exists for these constraints:\n\nchromaticCompressor(x) -> [Rowdy(x), x >= -79]\nTender(x) -> [Rowdy(x), x < 66]\nrecentStem -> [chromaticCompressor(x)]\ndarkOlympics -> [Tender(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 2377.0, y = x - 9781.62. C(y) :- A(x), x <= 2776.63, y = x + 2530.83. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-489081/50) C(253083/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 2377.0 and where x <= 2776.63. The original model has one A(x), and x can be solved with A(0) B(-489081/50) C(253083/100)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain desertCottage { descriptiveAirport ::= new (id: Integer). Regular ::= (id: Integer). volumetricSea ::= (id: Integer). Regular(x) :- descriptiveAirport(x), x <= 19. volumetricSea(x) :- descriptiveAirport(x), x > -14. Mode :- Regular(x). Convoluted :- volumetricSea(x). conforms Mode, Convoluted. } partial model Jet of desertCottage { descriptiveAirport(x). }, descriptiveAirport(0), Regular(0), volumetricSea(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Mode, Convoluted].\nA solution exists for these constraints:\n\nRegular(x) -> [descriptiveAirport(x), x <= 19]\nvolumetricSea(x) -> [descriptiveAirport(x), x > -14]\nMode -> [Regular(x)]\nConvoluted -> [volumetricSea(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 6870, y = x + 582. C(y) :- A(x), x > 6521, y = x - 9059. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(6522) B(7104) C(-2537)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 6870 and where x > 6521. The original model has one A(x), and x can be solved with A(6522) B(7104) C(-2537)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain Jellied { chocolatyCaviar ::= new (id: Integer). fixedStyle ::= (id: Integer). Narrow ::= (id: Integer). fixedStyle(x) :- chocolatyCaviar(x), x > -19. Narrow(x) :- chocolatyCaviar(x), x < 48. dichotomicImprovement :- fixedStyle(x). Pure :- Narrow(x). conforms dichotomicImprovement, Pure. } partial model sugarySample of Jellied { chocolatyCaviar(x). }, chocolatyCaviar(0), fixedStyle(0), Narrow(0)",
+        "output": "This model is solvable because of the conformity of the following rules [dichotomicImprovement, Pure].\nA solution exists for these constraints:\n\nfixedStyle(x) -> [chocolatyCaviar(x), x > -19]\nNarrow(x) -> [chocolatyCaviar(x), x < 48]\ndichotomicImprovement -> [fixedStyle(x)]\nPure -> [Narrow(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 7213.35, y = x - 2383.58. C(y) :- A(x), x > 9255.69, y = x + 2877.72. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 119179/50) C(x + 71943/25)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 7213.35. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9255.69. The original model contains only one A(x), and x cannot be both < 7213.35 and > 9255.69."
+        "instruction": "Give an explanation why this is not solvable.",
+        "input": "domain pizzicatoCaramel\n{\n  greatDebt ::= new (id: Integer).\n  Tiny ::= (id: Integer).\n  Chunky ::= (id: Integer).\n\n  Tiny(x) :- greatDebt(x), x < -58.\n  Chunky(x) :- greatDebt(x), x > -43.\n  \n  Sparse :- Tiny(x).\n  roundedBullet :- Chunky(x).\n\n  conforms Sparse, roundedBullet.\n}\n\npartial model Crunchy of pizzicatoCaramel\n{\n  greatDebt(x).\n}, roundedBullet, Sparse, Chunky(, Tiny(",
+        "output": "This model is unsolvable because it requires the conformity of the following rules [Sparse, roundedBullet].\nConflicts exist in these constraints:\n\nroundedBullet -> [Chunky(x)]\nSparse -> [Tiny(x)]\nChunky(x) -> [greatDebt(x), x > -43]\nTiny(x) -> [greatDebt(x), x < -58]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 7105.76, y = x - 5181.42. C(y) :- A(x), x > 9544.69, y = x + 9444.77. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 259071/50) C(x + 944477/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 7105.76. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9544.69. The original model contains only one A(x), and x cannot be both <= 7105.76 and > 9544.69."
+        "instruction": "What is the solution?",
+        "input": "domain Blended { seethingDynamic ::= new (id: Integer). levelRabbit ::= (id: Integer). Wide ::= (id: Integer). levelRabbit(x) :- seethingDynamic(x), x <= -83. Wide(x) :- seethingDynamic(x), x <= -64. bestTequila :- levelRabbit(x). diachronicRate :- Wide(x). conforms bestTequila, diachronicRate. } partial model optimalCode of Blended { seethingDynamic(x). }, seethingDynamic(-83), levelRabbit(-83), Wide(-83)",
+        "output": "This model is solvable because of the conformity of the following rules [bestTequila, diachronicRate].\nA solution exists for these constraints:\n\nlevelRabbit(x) -> [seethingDynamic(x), x <= -83]\nWide(x) -> [seethingDynamic(x), x <= -64]\nbestTequila -> [levelRabbit(x)]\ndiachronicRate -> [Wide(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 4256.54, y = x + 1066.79. C(y) :- A(x), x <= 3392.79, y = x - 2036.33. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 106679/100) C(x - 203633/100)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 4256.54. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 3392.79. The original model contains only one A(x), and x cannot be both > 4256.54 and <= 3392.79."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Worn { Rude ::= new (id: Integer). Loyal ::= (id: Integer). colorfulCalorie ::= (id: Integer). Loyal(x) :- Rude(x), x < 43. colorfulCalorie(x) :- Rude(x), x > -47. pokyType :- Loyal(x). finiteClique :- colorfulCalorie(x). conforms pokyType, finiteClique. } partial model Kind of Worn { Rude(x). }, Rude(0), Loyal(0), colorfulCalorie(0)",
+        "output": "This model is solvable because of the conformity of the following rules [pokyType, finiteClique].\nA solution exists for these constraints:\n\nLoyal(x) -> [Rude(x), x < 43]\ncolorfulCalorie(x) -> [Rude(x), x > -47]\npokyType -> [Loyal(x)]\nfiniteClique -> [colorfulCalorie(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 6673, y = x - 5323. C(y) :- A(x), x > 9452, y = x + 5625. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 5323) C(x + 5625)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 6673. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9452. The original model contains only one A(x), and x cannot be both <= 6673 and > 9452."
+        "instruction": "Why is this model solvable?",
+        "input": "domain SymbolicMin { A ::= new (x : Integer). B ::= new (x : Integer). minVal ::= (x : Integer). goodA :- a is A, a.x > 10. goodB :- b is B, b.x > 20. minVal(x) :- a is A, b is B, x = min(a.x, b.x). goodModel :- m is minVal, m.x > 51. conforms goodA. conforms goodB. conforms goodModel. } partial model pm of SymbolicMin { a is A(x). b is B(y). }, A(52), B(52), minVal(52)",
+        "output": "This model is solvable because of the conformity of the following rules [goodA, goodB, goodModel].\nA solution exists for these constraints:\n\ngoodA -> [a is A, a.x > 10]\ngoodB -> [b is B, b.x > 20]\nminVal(x) -> [a is A, b is B, x = min(a.x, b.x)]\ngoodModel -> [m is minVal, m.x > 51]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 2510.44, y = x + 2706.93. C(y) :- A(x), x <= 443.43, y = x - 6985.62. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 270693/100) C(x - 349281/50)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 2510.44. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 443.43. The original model contains only one A(x), and x cannot be both > 2510.44 and <= 443.43."
+        "instruction": "Solve the following model.",
+        "input": "domain Raw { lazyInfomediary ::= new (x : Integer). Resolving ::= new (x : Integer). Complete ::= (x : Integer). Radiant :- a is lazyInfomediary, a.x <= 0. Olive :- b is Resolving, b.x <= 73. Complete(x) :- a is lazyInfomediary, b is Resolving, x = min(a.x, b.x). freeCastle :- m is Complete, m.x >= -6. conforms Radiant. conforms Olive. conforms freeCastle. } partial model internalFlamingo of Raw { a is lazyInfomediary(x). b is Resolving(y). }, lazyInfomediary(0), Resolving(0), Complete(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Radiant, Olive, freeCastle].\nA solution exists for these constraints:\n\nRadiant -> [a is lazyInfomediary, a.x <= 0]\nOlive -> [b is Resolving, b.x <= 73]\nComplete(x) -> [a is lazyInfomediary, b is Resolving, x = min(a.x, b.x)]\nfreeCastle -> [m is Complete, m.x >= -6]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 6846, y = x + 2311. C(y) :- A(x), x > 2051, y = x - 404. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2052) B(4363) C(1648)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 6846 and where x > 2051. The original model has one A(x), and x can be solved with A(2052) B(4363) C(1648)."
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Urbane { Steel ::= new (x : Integer). fixedCarrier ::= new (x : Integer). tenseLily ::= (x : Integer). Energetic :- a is Steel, a.x < 6. obnoxiousInch :- b is fixedCarrier, b.x >= -90. tenseLily(x) :- a is Steel, b is fixedCarrier, x = min(a.x, b.x). pleasantTrack :- m is tenseLily, m.x <= 29. conforms Energetic. conforms obnoxiousInch. conforms pleasantTrack. } partial model woodenCanteen of Urbane { a is Steel(x). b is fixedCarrier(y). }, Steel(0), fixedCarrier(0), tenseLily(0)",
+        "output": "This model is solvable because of the conformity of the following rules [Energetic, obnoxiousInch, pleasantTrack].\nA solution exists for these constraints:\n\nEnergetic -> [a is Steel, a.x < 6]\nobnoxiousInch -> [b is fixedCarrier, b.x >= -90]\ntenseLily(x) -> [a is Steel, b is fixedCarrier, x = min(a.x, b.x)]\npleasantTrack -> [m is tenseLily, m.x <= 29]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5877.58, y = x + 8863.28. C(y) :- A(x), x >= 4400.43, y = x - 8052.45. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(440043/100) B(1326371/100) C(-182601/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5877.58 and where x >= 4400.43. The original model has one A(x), and x can be solved with A(440043/100) B(1326371/100) C(-182601/50)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain concaveDepth { Obsolete ::= new (x : Integer). Isomorphic ::= new (x : Integer). humongousFarad ::= (x : Integer). redBerry :- a is Obsolete, a.x > -46. humbleMyth :- b is Isomorphic, b.x >= -72. humongousFarad(x) :- a is Obsolete, b is Isomorphic, x = min(a.x, b.x). tenderMarket :- m is humongousFarad, m.x >= 17. conforms redBerry. conforms humbleMyth. conforms tenderMarket. } partial model Open of concaveDepth { a is Obsolete(x). b is Isomorphic(y). }, Obsolete(17), Isomorphic(17), humongousFarad(17)",
+        "output": "This model is solvable because of the conformity of the following rules [redBerry, humbleMyth, tenderMarket].\nA solution exists for these constraints:\n\nredBerry -> [a is Obsolete, a.x > -46]\nhumbleMyth -> [b is Isomorphic, b.x >= -72]\nhumongousFarad(x) -> [a is Obsolete, b is Isomorphic, x = min(a.x, b.x)]\ntenderMarket -> [m is humongousFarad, m.x >= 17]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 2709.49, y = x + 6880.29. C(y) :- A(x), x > 2504.85, y = x - 9994.3. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(50117/20) B(469307/50) C(-149769/20)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 2709.49 and where x > 2504.85. The original model has one A(x), and x can be solved with A(50117/20) B(469307/50) C(-149769/20)."
+        "instruction": "What is the solution?",
+        "input": "domain rustOwl { Patient ::= new (x : Integer). factorialKettle ::= new (x : Integer). naturalPlate ::= (x : Integer). boneMonitor :- a is Patient, a.x > 12. Scalding :- b is factorialKettle, b.x >= -91. naturalPlate(x) :- a is Patient, b is factorialKettle, x = min(a.x, b.x). messySectional :- m is naturalPlate, m.x > -39. conforms boneMonitor. conforms Scalding. conforms messySectional. } partial model onlineLog of rustOwl { a is Patient(x). b is factorialKettle(y). }, Patient(13), factorialKettle(0), naturalPlate(0)",
+        "output": "This model is solvable because of the conformity of the following rules [boneMonitor, Scalding, messySectional].\nA solution exists for these constraints:\n\nboneMonitor -> [a is Patient, a.x > 12]\nScalding -> [b is factorialKettle, b.x >= -91]\nnaturalPlate(x) -> [a is Patient, b is factorialKettle, x = min(a.x, b.x)]\nmessySectional -> [m is naturalPlate, m.x > -39]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 4639, y = x + 4757. C(y) :- A(x), x >= 6424, y = x - 9246. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 4757) C(x - 9246)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x < 4639. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 6424. The original model contains only one A(x), and x cannot be both < 4639 and >= 6424."
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Sour { Icy ::= new (x : Integer). Vibrato ::= new (x : Integer). Bare ::= (x : Integer). slimGear :- a is Icy, a.x >= -49. stubbornBookcase :- b is Vibrato, b.x >= -21. Bare(x) :- a is Icy, b is Vibrato, x = min(a.x, b.x). Blocky :- m is Bare, m.x < 21. conforms slimGear. conforms stubbornBookcase. conforms Blocky. } partial model Exothermic of Sour { a is Icy(x). b is Vibrato(y). }, Icy(0), Vibrato(0), Bare(0)",
+        "output": "This model is solvable because of the conformity of the following rules [slimGear, stubbornBookcase, Blocky].\nA solution exists for these constraints:\n\nslimGear -> [a is Icy, a.x >= -49]\nstubbornBookcase -> [b is Vibrato, b.x >= -21]\nBare(x) -> [a is Icy, b is Vibrato, x = min(a.x, b.x)]\nBlocky -> [m is Bare, m.x < 21]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 9128, y = x + 4643. C(y) :- A(x), x <= 7178, y = x - 4180. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(4643) C(-4180)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 9128 and where x <= 7178. The original model has one A(x), and x can be solved with A(0) B(4643) C(-4180)."
+        "instruction": "Solve the following model.",
+        "input": "domain eagerGrout { Brownian ::= new (x : Integer). Free ::= new (x : Integer). Unary ::= (x : Integer). equidistantDynamic :- a is Brownian, a.x < 81. Acyclic :- b is Free, b.x <= -32. Unary(x) :- a is Brownian, b is Free, x = min(a.x, b.x). citronHeel :- m is Unary, m.x < -25. conforms equidistantDynamic. conforms Acyclic. conforms citronHeel. } partial model dynamicBow of eagerGrout { a is Brownian(x). b is Free(y). }, Brownian(0), Free(-32), Unary(-32)",
+        "output": "This model is solvable because of the conformity of the following rules [equidistantDynamic, Acyclic, citronHeel].\nA solution exists for these constraints:\n\nequidistantDynamic -> [a is Brownian, a.x < 81]\nAcyclic -> [b is Free, b.x <= -32]\nUnary(x) -> [a is Brownian, b is Free, x = min(a.x, b.x)]\ncitronHeel -> [m is Unary, m.x < -25]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 8818.89, y = x + 8419.85. C(y) :- A(x), x > 9323.64, y = x - 702.25. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 168397/20) C(x - 2809/4)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 8818.89. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9323.64. The original model contains only one A(x), and x cannot be both <= 8818.89 and > 9323.64."
+        "instruction": "Solve the following model.",
+        "input": "domain Connected { Steamed ::= new (x : Integer). mintCotija ::= new (x : Integer). dyadicChicken ::= (x : Integer). chocolatyTrainer :- a is Steamed, a.x >= -84. Feasible :- b is mintCotija, b.x > -21. dyadicChicken(x) :- a is Steamed, b is mintCotija, x = min(a.x, b.x). ascentHelmet :- m is dyadicChicken, m.x < 34. conforms chocolatyTrainer. conforms Feasible. conforms ascentHelmet. } partial model Old of Connected { a is Steamed(x). b is mintCotija(y). }, Steamed(0), mintCotija(0), dyadicChicken(0)",
+        "output": "This model is solvable because of the conformity of the following rules [chocolatyTrainer, Feasible, ascentHelmet].\nA solution exists for these constraints:\n\nchocolatyTrainer -> [a is Steamed, a.x >= -84]\nFeasible -> [b is mintCotija, b.x > -21]\ndyadicChicken(x) -> [a is Steamed, b is mintCotija, x = min(a.x, b.x)]\nascentHelmet -> [m is dyadicChicken, m.x < 34]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 875, y = x - 486. C(y) :- A(x), x > 9883, y = x + 788. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 486) C(x + 788)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 875. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9883. The original model contains only one A(x), and x cannot be both <= 875 and > 9883."
+        "instruction": "Why is this model solvable?",
+        "input": "domain Gourmet { Concrete ::= new (x : Integer). Crimson ::= new (x : Integer). Isochoric ::= (x : Integer). plainDamask :- a is Concrete, a.x <= -12. Icy :- b is Crimson, b.x <= -33. Isochoric(x) :- a is Concrete, b is Crimson, x = min(a.x, b.x). Shabby :- m is Isochoric, m.x < 84. conforms plainDamask. conforms Icy. conforms Shabby. } partial model Tempered of Gourmet { a is Concrete(x). b is Crimson(y). }, Concrete(-12), Crimson(-33), Isochoric(-33)",
+        "output": "This model is solvable because of the conformity of the following rules [plainDamask, Icy, Shabby].\nA solution exists for these constraints:\n\nplainDamask -> [a is Concrete, a.x <= -12]\nIcy -> [b is Crimson, b.x <= -33]\nIsochoric(x) -> [a is Concrete, b is Crimson, x = min(a.x, b.x)]\nShabby -> [m is Isochoric, m.x < 84]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 1737.2, y = x + 3215.7. C(y) :- A(x), x >= 418.4, y = x - 1677.24. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8691/5) B(49539/10) C(1524/25)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 1737.2 and where x >= 418.4. The original model has one A(x), and x can be solved with A(8691/5) B(49539/10) C(1524/25)."
+        "instruction": "This formula file is solvable because",
+        "input": "domain Magnetic { Scalding ::= new (x : Integer). basicToast ::= new (x : Integer). Indigo ::= (x : Integer). creativeFruit :- a is Scalding, a.x > -51. convexCoulomb :- b is basicToast, b.x >= 15. Indigo(x) :- a is Scalding, b is basicToast, x = min(a.x, b.x). butteryCharacter :- m is Indigo, m.x > -77. conforms creativeFruit. conforms convexCoulomb. conforms butteryCharacter. } partial model Augmenting of Magnetic { a is Scalding(x). b is basicToast(y). }, Scalding(15), basicToast(15), Indigo(15)",
+        "output": "This model is solvable because of the conformity of the following rules [creativeFruit, convexCoulomb, butteryCharacter].\nA solution exists for these constraints:\n\ncreativeFruit -> [a is Scalding, a.x > -51]\nconvexCoulomb -> [b is basicToast, b.x >= 15]\nIndigo(x) -> [a is Scalding, b is basicToast, x = min(a.x, b.x)]\nbutteryCharacter -> [m is Indigo, m.x > -77]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 4499.25, y = x + 9590.66. C(y) :- A(x), x >= 9337.85, y = x - 1863.54. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 479533/50) C(x - 93177/50)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 4499.25. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x >= 9337.85. The original model contains only one A(x), and x cannot be both <= 4499.25 and >= 9337.85."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain Simple { A ::= new (id: Integer). B ::= (id : Integer). B(y) :- A(x), x > 0, y = x - 1. goodModel :- B(x). conforms goodModel. } partial model pm of Simple { A(x). }, A(1), B(0)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\nB(y) -> [A(x), x > 0, y = x - 1]\ngoodModel -> [B(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 791, y = x - 5911. C(y) :- A(x), x < 2473, y = x + 3443. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(791) B(-5120) C(4234)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 791 and where x < 2473. The original model has one A(x), and x can be solved with A(791) B(-5120) C(4234)."
+        "instruction": "This formula file is solvable because",
+        "input": "domain Brown { whiteBarnacles ::= new (id: Integer). Plain ::= (id : Integer). Plain(y) :- whiteBarnacles(x), x >= -57, y = x - 1. Lazy :- Plain(x). conforms Lazy. } partial model Lean of Brown { whiteBarnacles(x). }, whiteBarnacles(0), Plain(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [Lazy].\nA solution exists for these constraints:\n\nPlain(y) -> [whiteBarnacles(x), x >= -57, y = x - 1]\nLazy -> [Plain(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 5407.7, y = x + 2618.65. C(y) :- A(x), x >= 4003.02, y = x - 6009.64. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(200151/50) B(662167/100) C(-100331/50)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 5407.7 and where x >= 4003.02. The original model has one A(x), and x can be solved with A(200151/50) B(662167/100) C(-100331/50)."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain brinyCockatoo { denseReturn ::= new (id: Integer). Green ::= (id : Integer). Green(y) :- denseReturn(x), x > -68, y = x - 1. greenGarlic :- Green(x). conforms greenGarlic. } partial model Greasy of brinyCockatoo { denseReturn(x). }, denseReturn(0), Green(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [greenGarlic].\nA solution exists for these constraints:\n\nGreen(y) -> [denseReturn(x), x > -68, y = x - 1]\ngreenGarlic -> [Green(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8324, y = x + 8035. C(y) :- A(x), x > 7557, y = x - 8880. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(7558) B(15593) C(-1322)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8324 and where x > 7557. The original model has one A(x), and x can be solved with A(7558) B(15593) C(-1322)."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain lividInterval { Planar ::= new (id: Integer). daringGrid ::= (id : Integer). daringGrid(y) :- Planar(x), x < 71, y = x - 1. Yummy :- daringGrid(x). conforms Yummy. } partial model Chewy of lividInterval { Planar(x). }, Planar(0), daringGrid(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [Yummy].\nA solution exists for these constraints:\n\ndaringGrid(y) -> [Planar(x), x < 71, y = x - 1]\nYummy -> [daringGrid(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 2713, y = x + 6929. C(y) :- A(x), x >= 3371, y = x - 3269. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(3371) B(10300) C(102)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 2713 and where x >= 3371. The original model has one A(x), and x can be solved with A(3371) B(10300) C(102)."
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain weatheredTempo { forwardSubcompact ::= new (id: Integer). resultantFront ::= (id : Integer). resultantFront(y) :- forwardSubcompact(x), x < 21, y = x - 1. cheesyContent :- resultantFront(x). conforms cheesyContent. } partial model acidicGate of weatheredTempo { forwardSubcompact(x). }, forwardSubcompact(0), resultantFront(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [cheesyContent].\nA solution exists for these constraints:\n\nresultantFront(y) -> [forwardSubcompact(x), x < 21, y = x - 1]\ncheesyContent -> [resultantFront(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 1152, y = x + 5277. C(y) :- A(x), x < 7790, y = x - 8555. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1152) B(6429) C(-7403)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x >= 1152 and where x < 7790. The original model has one A(x), and x can be solved with A(1152) B(6429) C(-7403)."
+        "instruction": "What is the solution?",
+        "input": "domain Mild { Bare ::= new (id: Integer). greatFormant ::= (id : Integer). greatFormant(y) :- Bare(x), x > -69, y = x - 1. concaveCroissant :- greatFormant(x). conforms concaveCroissant. } partial model Cloudy of Mild { Bare(x). }, Bare(0), greatFormant(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [concaveCroissant].\nA solution exists for these constraints:\n\ngreatFormant(y) -> [Bare(x), x > -69, y = x - 1]\nconcaveCroissant -> [greatFormant(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 5263, y = x + 4647. C(y) :- A(x), x < 8447, y = x - 6242. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(5264) B(9911) C(-978)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 5263 and where x < 8447. The original model has one A(x), and x can be solved with A(5264) B(9911) C(-978)."
+        "instruction": "What is the solution to this model?",
+        "input": "domain internalVehicle { Stringy ::= new (id: Integer). Tranquil ::= (id : Integer). Tranquil(y) :- Stringy(x), x < -71, y = x - 1. furiousResistivity :- Tranquil(x). conforms furiousResistivity. } partial model mintyPlugin of internalVehicle { Stringy(x). }, Stringy(-72), Tranquil(-73)",
+        "output": "This model is solvable because of the conformity of the following rules [furiousResistivity].\nA solution exists for these constraints:\n\nTranquil(y) -> [Stringy(x), x < -71, y = x - 1]\nfuriousResistivity -> [Tranquil(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 6277, y = x + 9472. C(y) :- A(x), x <= 101, y = x - 1886. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 9472) C(x - 1886)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 6277. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 101. The original model contains only one A(x), and x cannot be both > 6277 and <= 101."
+        "instruction": "What is the solution to this model?",
+        "input": "domain Marinated { rawBiscuit ::= new (id: Integer). Instant ::= (id : Integer). Instant(y) :- rawBiscuit(x), x >= 1, y = x - 1. frigidHoop :- Instant(x). conforms frigidHoop. } partial model Binary of Marinated { rawBiscuit(x). }, rawBiscuit(1), Instant(0)",
+        "output": "This model is solvable because of the conformity of the following rules [frigidHoop].\nA solution exists for these constraints:\n\nInstant(y) -> [rawBiscuit(x), x >= 1, y = x - 1]\nfrigidHoop -> [Instant(x)]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x > 7688.25, y = x + 2992.55. C(y) :- A(x), x < 3537.01, y = x - 119.8. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 59851/20) C(x - 599/5)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 7688.25. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x < 3537.01. The original model contains only one A(x), and x cannot be both > 7688.25 and < 3537.01."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain concaveAdjuster { slowMagnitude ::= new (id: Integer). gratingBevel ::= (id : Integer). gratingBevel(y) :- slowMagnitude(x), x < -14, y = x - 1. Intricate :- gratingBevel(x). conforms Intricate. } partial model nearestSwamp of concaveAdjuster { slowMagnitude(x). }, slowMagnitude(-15), gratingBevel(-16)",
+        "output": "This model is solvable because of the conformity of the following rules [Intricate].\nA solution exists for these constraints:\n\ngratingBevel(y) -> [slowMagnitude(x), x < -14, y = x - 1]\nIntricate -> [gratingBevel(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 3746, y = x + 9473. C(y) :- A(x), x >= 1159, y = x - 4038. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1159) B(10632) C(-2879)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 3746 and where x >= 1159. The original model has one A(x), and x can be solved with A(1159) B(10632) C(-2879)."
+        "instruction": "What is the solution?",
+        "input": "domain resolvingCandy { Nutty ::= new (id: Integer). Noisy ::= (id : Integer). Noisy(y) :- Nutty(x), x >= -6, y = x - 1. Rectilinear :- Noisy(x). conforms Rectilinear. } partial model Linear of resolvingCandy { Nutty(x). }, Nutty(0), Noisy(-1)",
+        "output": "This model is solvable because of the conformity of the following rules [Rectilinear].\nA solution exists for these constraints:\n\nNoisy(y) -> [Nutty(x), x >= -6, y = x - 1]\nRectilinear -> [Noisy(x)]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x < 9413, y = x + 132. C(y) :- A(x), x > 6512, y = x - 3881. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(6513) B(6645) C(2632)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 9413 and where x > 6512. The original model has one A(x), and x can be solved with A(6513) B(6645) C(2632)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain SymbolicAndAll { A ::= new (x : Boolean). B ::= new (x : Boolean). AndValue ::= (x : Boolean). AndValue(x) :- a is A, b is B, x = andAll(FALSE, {a.x, b.x}), x : Boolean. goodModel :- AndValue(x), x = TRUE. conforms goodModel. } partial model pm of SymbolicAndAll { a is A(x). b is B(y). } , A(TRUE), B(TRUE), AndValue(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\nAndValue(x) -> [a is A, b is B, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\ngoodModel -> [AndValue(x), x = TRUE]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x >= 7856, y = x - 7392. C(y) :- A(x), x <= 4365, y = x + 962. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x - 7392) C(x + 962)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x >= 7856. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 4365. The original model contains only one A(x), and x cannot be both >= 7856 and <= 4365."
+        "instruction": "What is the solution to this model?",
+        "input": "domain afraidAccelerometer { Average ::= new (x : Boolean). Violet ::= new (x : Boolean). Chromatic ::= (x : Boolean). Chromatic(x) :- a is Average, b is Violet, x = andAll(FALSE, {a.x, b.x}), x : Boolean. Clever :- Chromatic(x), x = Exothermic. conforms Clever. } partial model mintyPine of afraidAccelerometer { a is Average(x). b is Violet(y). } , Average(TRUE), Violet(TRUE), Chromatic(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Clever].\nA solution exists for these constraints:\n\nChromatic(x) -> [a is Average, b is Violet, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nClever -> [Chromatic(x), x = Exothermic]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 3782, y = x + 1732. C(y) :- A(x), x <= 2052, y = x - 2876. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 1732) C(x - 2876)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x > 3782. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x <= 2052. The original model contains only one A(x), and x cannot be both > 3782 and <= 2052."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain Nippy { largeCaptain ::= new (x : Boolean). Brownian ::= new (x : Boolean). shrewdBed ::= (x : Boolean). shrewdBed(x) :- a is largeCaptain, b is Brownian, x = andAll(FALSE, {a.x, b.x}), x : Boolean. gracefulBisector :- shrewdBed(x), x = Symmetric. conforms gracefulBisector. } partial model toughAngel of Nippy { a is largeCaptain(x). b is Brownian(y). } , largeCaptain(TRUE), Brownian(TRUE), shrewdBed(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [gracefulBisector].\nA solution exists for these constraints:\n\nshrewdBed(x) -> [a is largeCaptain, b is Brownian, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\ngracefulBisector -> [shrewdBed(x), x = Symmetric]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 8233, y = x - 6204. C(y) :- A(x), x >= 2764, y = x + 5638. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(8234) B(2030) C(13872)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 8233 and where x >= 2764. The original model has one A(x), and x can be solved with A(8234) B(2030) C(13872)."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain Corn { freezingLimit ::= new (x : Boolean). Online ::= new (x : Boolean). chartreuseTree ::= (x : Boolean). chartreuseTree(x) :- a is freezingLimit, b is Online, x = andAll(FALSE, {a.x, b.x}), x : Boolean. Archaic :- chartreuseTree(x), x = Messy. conforms Archaic. } partial model naiveConcentration of Corn { a is freezingLimit(x). b is Online(y). } , freezingLimit(TRUE), Online(TRUE), chartreuseTree(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Archaic].\nA solution exists for these constraints:\n\nchartreuseTree(x) -> [a is freezingLimit, b is Online, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nArchaic -> [chartreuseTree(x), x = Messy]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x < 127.94, y = x - 5250.4. C(y) :- A(x), x <= 9809.21, y = x + 1476.19. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(0) B(-26252/5) C(147619/100)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x < 127.94 and where x <= 9809.21. The original model has one A(x), and x can be solved with A(0) B(-26252/5) C(147619/100)."
+        "instruction": "This formula file is solvable because",
+        "input": "domain buoyantBamboo { Diagonal ::= new (x : Boolean). Nondeterministic ::= new (x : Boolean). aridMansion ::= (x : Boolean). aridMansion(x) :- a is Diagonal, b is Nondeterministic, x = andAll(FALSE, {a.x, b.x}), x : Boolean. emeraldBoa :- aridMansion(x), x = crispyGuarantor. conforms emeraldBoa. } partial model Jolly of buoyantBamboo { a is Diagonal(x). b is Nondeterministic(y). } , Diagonal(TRUE), Nondeterministic(TRUE), aridMansion(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [emeraldBoa].\nA solution exists for these constraints:\n\naridMansion(x) -> [a is Diagonal, b is Nondeterministic, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nemeraldBoa -> [aridMansion(x), x = crispyGuarantor]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 6703, y = x - 9617. C(y) :- A(x), x >= 9386, y = x + 3722. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(9386) B(-231) C(13108)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 6703 and where x >= 9386. The original model has one A(x), and x can be solved with A(9386) B(-231) C(13108)."
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain mintBody { corporatePhase ::= new (x : Boolean). Genteel ::= new (x : Boolean). flatMarker ::= (x : Boolean). flatMarker(x) :- a is corporatePhase, b is Genteel, x = andAll(FALSE, {a.x, b.x}), x : Boolean. vividShoal :- flatMarker(x), x = fadedBoondoggle. conforms vividShoal. } partial model calmSting of mintBody { a is corporatePhase(x). b is Genteel(y). } , corporatePhase(TRUE), Genteel(TRUE), flatMarker(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [vividShoal].\nA solution exists for these constraints:\n\nflatMarker(x) -> [a is corporatePhase, b is Genteel, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nvividShoal -> [flatMarker(x), x = fadedBoondoggle]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x > 2811, y = x - 6620. C(y) :- A(x), x <= 3752, y = x + 9081. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(2812) B(-3808) C(11893)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x > 2811 and where x <= 3752. The original model has one A(x), and x can be solved with A(2812) B(-3808) C(11893)."
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain Icy { Shy ::= new (x : Boolean). maroonFalcon ::= new (x : Boolean). insulatedSequence ::= (x : Boolean). insulatedSequence(x) :- a is Shy, b is maroonFalcon, x = andAll(FALSE, {a.x, b.x}), x : Boolean. ternaryEmpanada :- insulatedSequence(x), x = livelyLeaf. conforms ternaryEmpanada. } partial model Coped of Icy { a is Shy(x). b is maroonFalcon(y). } , Shy(TRUE), maroonFalcon(TRUE), insulatedSequence(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [ternaryEmpanada].\nA solution exists for these constraints:\n\ninsulatedSequence(x) -> [a is Shy, b is maroonFalcon, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nternaryEmpanada -> [insulatedSequence(x), x = livelyLeaf]\n"
     },
     {
-        "instruction": "Explain why this model is solvable",
-        "input": "domain DOM { A ::= new (id1: Integer). B ::= (id1: Integer). C ::= (id1: Integer). B(y) :- A(x), x <= 8152, y = x + 357. C(y) :- A(x), x > 1377, y = x - 9758. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, A(1378) B(1735) C(-8380)",
-        "output": "This model can be solved because both goodModel and badModel are derived where x <= 8152 and where x > 1377. The original model has one A(x), and x can be solved with A(1378) B(1735) C(-8380)."
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain rightPolytope { Rounded ::= new (x : Boolean). frigidEmrasure ::= new (x : Boolean). upbeatNosing ::= (x : Boolean). upbeatNosing(x) :- a is Rounded, b is frigidEmrasure, x = andAll(FALSE, {a.x, b.x}), x : Boolean. brassTon :- upbeatNosing(x), x = blendedTub. conforms brassTon. } partial model intricateCello of rightPolytope { a is Rounded(x). b is frigidEmrasure(y). } , Rounded(TRUE), frigidEmrasure(TRUE), upbeatNosing(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [brassTon].\nA solution exists for these constraints:\n\nupbeatNosing(x) -> [a is Rounded, b is frigidEmrasure, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nbrassTon -> [upbeatNosing(x), x = blendedTub]\n"
     },
     {
-        "instruction": "Explain why this model is not solvable",
-        "input": "domain DOM { A ::= new (id1: Real). B ::= (id1: Real). C ::= (id1: Real). B(y) :- A(x), x <= 902.05, y = x + 8057.76. C(y) :- A(x), x > 9557.33, y = x - 3726.0. goodModel :- B(x). badModel :- C(x). conforms goodModel, badModel. }, partial model pm of DOM { A(x). }, B(x + 201444/25) C(x - 3726)",
-        "output": "This model cannot be solved because it requires a goodModel and a badModel.\nA goodModel is derived if a B(x) exists. A B(x) exists only if an A(x) exists where x <= 902.05. A badModel is derived if a C(x) exists. A C(x) exists only if an A(x) exists where x > 9557.33. The original model contains only one A(x), and x cannot be both <= 902.05 and > 9557.33."
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain flavorfulSquare { aridEdge ::= new (x : Boolean). Open ::= new (x : Boolean). Tomato ::= (x : Boolean). Tomato(x) :- a is aridEdge, b is Open, x = andAll(FALSE, {a.x, b.x}), x : Boolean. raggedJeep :- Tomato(x), x = Dichotomic. conforms raggedJeep. } partial model fastElectricity of flavorfulSquare { a is aridEdge(x). b is Open(y). } , aridEdge(TRUE), Open(TRUE), Tomato(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [raggedJeep].\nA solution exists for these constraints:\n\nTomato(x) -> [a is aridEdge, b is Open, x = andAll(FALSE, {a.x, b.x}), x : Boolean]\nraggedJeep -> [Tomato(x), x = Dichotomic]\n"
+    },
+    {
+        "instruction": "Give an explanation why this is solvable.",
+        "input": "domain SymbolicOrAll { A ::= new (x : Boolean). B ::= new (x : Boolean). OrValue ::= (x : Boolean). OrValue(x) :- a is A, b is B, x = orAll(FALSE, {a.x, b.x}), x : Boolean. goodModel :- OrValue(x), x = TRUE. conforms goodModel. } partial model pm of SymbolicOrAll { a is A(x). b is B(y). } , A(FALSE), B(TRUE), OrValue(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [goodModel].\nA solution exists for these constraints:\n\nOrValue(x) -> [a is A, b is B, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\ngoodModel -> [OrValue(x), x = TRUE]\n"
+    },
+    {
+        "instruction": "Explain why this model is solvable.",
+        "input": "domain dampGlaze { Unproductive ::= new (x : Boolean). irregularDome ::= new (x : Boolean). orderedTiming ::= (x : Boolean). orderedTiming(x) :- a is Unproductive, b is irregularDome, x = orAll(FALSE, {a.x, b.x}), x : Boolean. Bright :- orderedTiming(x), x = dynamicCurb. conforms Bright. } partial model mechanicalEllipsis of dampGlaze { a is Unproductive(x). b is irregularDome(y). } , Unproductive(TRUE), irregularDome(TRUE), orderedTiming(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Bright].\nA solution exists for these constraints:\n\norderedTiming(x) -> [a is Unproductive, b is irregularDome, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nBright -> [orderedTiming(x), x = dynamicCurb]\n"
+    },
+    {
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain sizzlingCluster { Convoluted ::= new (x : Boolean). Piquant ::= new (x : Boolean). amicableTemplate ::= (x : Boolean). amicableTemplate(x) :- a is Convoluted, b is Piquant, x = orAll(FALSE, {a.x, b.x}), x : Boolean. spicyTheme :- amicableTemplate(x), x = Complicated. conforms spicyTheme. } partial model Raw of sizzlingCluster { a is Convoluted(x). b is Piquant(y). } , Convoluted(TRUE), Piquant(TRUE), amicableTemplate(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [spicyTheme].\nA solution exists for these constraints:\n\namicableTemplate(x) -> [a is Convoluted, b is Piquant, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nspicyTheme -> [amicableTemplate(x), x = Complicated]\n"
+    },
+    {
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Obliging { Sparse ::= new (x : Boolean). Stale ::= new (x : Boolean). Product ::= (x : Boolean). Product(x) :- a is Sparse, b is Stale, x = orAll(FALSE, {a.x, b.x}), x : Boolean. Rank :- Product(x), x = pallidRake. conforms Rank. } partial model Perpendicular of Obliging { a is Sparse(x). b is Stale(y). } , Sparse(TRUE), Stale(TRUE), Product(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Rank].\nA solution exists for these constraints:\n\nProduct(x) -> [a is Sparse, b is Stale, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nRank -> [Product(x), x = pallidRake]\n"
+    },
+    {
+        "instruction": "Solve the following model.",
+        "input": "domain Progressive { Full ::= new (x : Boolean). Direct ::= new (x : Boolean). Bipartite ::= (x : Boolean). Bipartite(x) :- a is Full, b is Direct, x = orAll(FALSE, {a.x, b.x}), x : Boolean. parallelUpload :- Bipartite(x), x = Blended. conforms parallelUpload. } partial model faintPlywood of Progressive { a is Full(x). b is Direct(y). } , Full(TRUE), Direct(TRUE), Bipartite(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [parallelUpload].\nA solution exists for these constraints:\n\nBipartite(x) -> [a is Full, b is Direct, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nparallelUpload -> [Bipartite(x), x = Blended]\n"
+    },
+    {
+        "instruction": "What is the solution to this model?",
+        "input": "domain burningBeat { Isothermal ::= new (x : Boolean). Critical ::= new (x : Boolean). flatSnippet ::= (x : Boolean). flatSnippet(x) :- a is Isothermal, b is Critical, x = orAll(FALSE, {a.x, b.x}), x : Boolean. Blended :- flatSnippet(x), x = compositeBlockade. conforms Blended. } partial model Light of burningBeat { a is Isothermal(x). b is Critical(y). } , Isothermal(TRUE), Critical(TRUE), flatSnippet(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Blended].\nA solution exists for these constraints:\n\nflatSnippet(x) -> [a is Isothermal, b is Critical, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nBlended -> [flatSnippet(x), x = compositeBlockade]\n"
+    },
+    {
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain crabbyServer { Sweet ::= new (x : Boolean). nutritiousRequest ::= new (x : Boolean). adjacentCamembert ::= (x : Boolean). adjacentCamembert(x) :- a is Sweet, b is nutritiousRequest, x = orAll(FALSE, {a.x, b.x}), x : Boolean. Rust :- adjacentCamembert(x), x = Chocolate. conforms Rust. } partial model ceruleanDenim of crabbyServer { a is Sweet(x). b is nutritiousRequest(y). } , Sweet(TRUE), nutritiousRequest(TRUE), adjacentCamembert(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Rust].\nA solution exists for these constraints:\n\nadjacentCamembert(x) -> [a is Sweet, b is nutritiousRequest, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nRust -> [adjacentCamembert(x), x = Chocolate]\n"
+    },
+    {
+        "instruction": "Solve the following model.",
+        "input": "domain freeStucco { primaryTransit ::= new (x : Boolean). Coal ::= new (x : Boolean). Staff ::= (x : Boolean). Staff(x) :- a is primaryTransit, b is Coal, x = orAll(FALSE, {a.x, b.x}), x : Boolean. modernChicken :- Staff(x), x = Inverted. conforms modernChicken. } partial model bigJarhead of freeStucco { a is primaryTransit(x). b is Coal(y). } , primaryTransit(TRUE), Coal(TRUE), Staff(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [modernChicken].\nA solution exists for these constraints:\n\nStaff(x) -> [a is primaryTransit, b is Coal, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nmodernChicken -> [Staff(x), x = Inverted]\n"
+    },
+    {
+        "instruction": "Solve the following model.",
+        "input": "domain Swift { Pounded ::= new (x : Boolean). steelFortress ::= new (x : Boolean). slowChamfer ::= (x : Boolean). slowChamfer(x) :- a is Pounded, b is steelFortress, x = orAll(FALSE, {a.x, b.x}), x : Boolean. Closed :- slowChamfer(x), x = Either. conforms Closed. } partial model staccatoTranslation of Swift { a is Pounded(x). b is steelFortress(y). } , Pounded(TRUE), steelFortress(TRUE), slowChamfer(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [Closed].\nA solution exists for these constraints:\n\nslowChamfer(x) -> [a is Pounded, b is steelFortress, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\nClosed -> [slowChamfer(x), x = Either]\n"
+    },
+    {
+        "instruction": "Why is this formula file solvable?",
+        "input": "domain greatBog { Wide ::= new (x : Boolean). universalMace ::= new (x : Boolean). littleTensor ::= (x : Boolean). littleTensor(x) :- a is Wide, b is universalMace, x = orAll(FALSE, {a.x, b.x}), x : Boolean. distinctName :- littleTensor(x), x = Pallid. conforms distinctName. } partial model Briny of greatBog { a is Wide(x). b is universalMace(y). } , Wide(TRUE), universalMace(TRUE), littleTensor(TRUE)",
+        "output": "This model is solvable because of the conformity of the following rules [distinctName].\nA solution exists for these constraints:\n\nlittleTensor(x) -> [a is Wide, b is universalMace, x = orAll(FALSE, {a.x, b.x}), x : Boolean]\ndistinctName -> [littleTensor(x), x = Pallid]\n"
+    },
+    {
+        "instruction": "What is the solution?",
+        "input": "domain Mapping { Component ::= new (id: Integer, utilization: Real). Processor ::= new (id: Integer). Mapping ::= new (c: Component, p: Processor). invalidUtilization :- c is Component, c.utilization <= 0. badMapping :- p is Processor, s = sum(0.0, { c.utilization | c is Component, Mapping(c, p) }), s > 100. conforms no badMapping, no invalidUtilization. } partial model pm of Mapping { c1 is Component(0, x). c2 is Component(1, y). p1 is Processor(0). Mapping(c1, p1). Mapping(c2, p1). }, Processor(0), Component(0, 1/4), Component(1, 1/4), Mapping(Component(0, 1/4), Processor(0)), Mapping(Component(1, 1/4), Processor(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no badMapping, no invalidUtilization].\nA solution exists for these constraints:\n\ninvalidUtilization -> [c is Component, c.utilization <= 0]\nbadMapping -> [p is Processor, s = sum(0.0, { c.utilization | c is Component, Mapping(c, p) }), s > 100]\n"
+    },
+    {
+        "instruction": "What is the solution to this model?",
+        "input": "domain concurrentVector { Corporate ::= new (id: Integer, utilization: Real). burningCliche ::= new (id: Integer). concurrentVector ::= new (c: Corporate, p: burningCliche). Libretto :- c is Corporate, c.utilization > 4. brassEngineer :- p is burningCliche, s = sum(0.0, { c.utilization | c is Corporate, concurrentVector(c, p) }), s >= -23. conforms no brassEngineer, no Libretto. } partial model Vertical of concurrentVector { c1 is Corporate(0, x). c2 is Corporate(1, y). p1 is burningCliche(0). concurrentVector(c1, p1). concurrentVector(c2, p1). }, burningCliche(0), Corporate(0, -29), Corporate(1, 5), concurrentVector(Corporate(0, -29), burningCliche(0)), concurrentVector(Corporate(1, 5), burningCliche(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no brassEngineer, no Libretto].\nA solution exists for these constraints:\n\nLibretto -> [c is Corporate, c.utilization > 4]\nbrassEngineer -> [p is burningCliche, s = sum(0.0, { c.utilization | c is Corporate, concurrentVector(c, p) }), s >= -23]\n"
+    },
+    {
+        "instruction": "Given a formula file, why is it solvable?",
+        "input": "domain Average { meekParody ::= new (id: Integer, utilization: Real). savageLoch ::= new (id: Integer). Average ::= new (c: meekParody, p: savageLoch). Bounded :- c is meekParody, c.utilization < 52. Glass :- p is savageLoch, s = sum(0.0, { c.utilization | c is meekParody, Average(c, p) }), s >= 68. conforms no Glass, no Bounded. } partial model tranquilBrandy of Average { c1 is meekParody(0, x). c2 is meekParody(1, y). p1 is savageLoch(0). Average(c1, p1). Average(c2, p1). }, savageLoch(0), meekParody(0, 52), meekParody(1, 0), Average(meekParody(0, 52), savageLoch(0)), Average(meekParody(1, 0), savageLoch(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no Glass, no Bounded].\nA solution exists for these constraints:\n\nBounded -> [c is meekParody, c.utilization < 52]\nGlass -> [p is savageLoch, s = sum(0.0, { c.utilization | c is meekParody, Average(c, p) }), s >= 68]\n"
+    },
+    {
+        "instruction": "This formula file is solvable because",
+        "input": "domain Mint { Vibrant ::= new (id: Integer, utilization: Real). Central ::= new (id: Integer). Mint ::= new (c: Vibrant, p: Central). Plastic :- c is Vibrant, c.utilization < 41. calmString :- p is Central, s = sum(0.0, { c.utilization | c is Vibrant, Mint(c, p) }), s <= -72. conforms no calmString, no Plastic. } partial model pizzicatoBrush of Mint { c1 is Vibrant(0, x). c2 is Vibrant(1, y). p1 is Central(0). Mint(c1, p1). Mint(c2, p1). }, Central(0), Vibrant(0, 41), Vibrant(1, 0), Mint(Vibrant(0, 41), Central(0)), Mint(Vibrant(1, 0), Central(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no calmString, no Plastic].\nA solution exists for these constraints:\n\nPlastic -> [c is Vibrant, c.utilization < 41]\ncalmString -> [p is Central, s = sum(0.0, { c.utilization | c is Vibrant, Mint(c, p) }), s <= -72]\n"
+    },
+    {
+        "instruction": "What is the solution?",
+        "input": "domain Diagonal { Basic ::= new (id: Integer, utilization: Real). orientedOmelette ::= new (id: Integer). Diagonal ::= new (c: Basic, p: orientedOmelette). calmAsiago :- c is Basic, c.utilization < -5. meanGear :- p is orientedOmelette, s = sum(0.0, { c.utilization | c is Basic, Diagonal(c, p) }), s < 93. conforms no meanGear, no calmAsiago. } partial model flashedTeam of Diagonal { c1 is Basic(0, x). c2 is Basic(1, y). p1 is orientedOmelette(0). Diagonal(c1, p1). Diagonal(c2, p1). }, orientedOmelette(0), Basic(0, 99), Basic(1, -6), Diagonal(Basic(0, 99), orientedOmelette(0)), Diagonal(Basic(1, -6), orientedOmelette(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no meanGear, no calmAsiago].\nA solution exists for these constraints:\n\ncalmAsiago -> [c is Basic, c.utilization < -5]\nmeanGear -> [p is orientedOmelette, s = sum(0.0, { c.utilization | c is Basic, Diagonal(c, p) }), s < 93]\n"
+    },
+    {
+        "instruction": "This formula file is solvable because",
+        "input": "domain Oblique { Ecru ::= new (id: Integer, utilization: Real). Excited ::= new (id: Integer). Oblique ::= new (c: Ecru, p: Excited). Refined :- c is Ecru, c.utilization >= 57. Online :- p is Excited, s = sum(0.0, { c.utilization | c is Ecru, Oblique(c, p) }), s < -54. conforms no Online, no Refined. } partial model warmUpstream of Oblique { c1 is Ecru(0, x). c2 is Ecru(1, y). p1 is Excited(0). Oblique(c1, p1). Oblique(c2, p1). }, Excited(0), Ecru(0, 0), Ecru(1, 0), Oblique(Ecru(0, 0), Excited(0)), Oblique(Ecru(1, 0), Excited(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no Online, no Refined].\nA solution exists for these constraints:\n\nRefined -> [c is Ecru, c.utilization >= 57]\nOnline -> [p is Excited, s = sum(0.0, { c.utilization | c is Ecru, Oblique(c, p) }), s < -54]\n"
+    },
+    {
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Stale { brassKeyword ::= new (id: Integer, utilization: Real). moltoSpline ::= new (id: Integer). Stale ::= new (c: brassKeyword, p: moltoSpline). concaveAlternator :- c is brassKeyword, c.utilization <= 22. Pointed :- p is moltoSpline, s = sum(0.0, { c.utilization | c is brassKeyword, Stale(c, p) }), s > -89. conforms no Pointed, no concaveAlternator. } partial model Eager of Stale { c1 is brassKeyword(0, x). c2 is brassKeyword(1, y). p1 is moltoSpline(0). Stale(c1, p1). Stale(c2, p1). }, moltoSpline(0), brassKeyword(0, -112), brassKeyword(1, 23), Stale(brassKeyword(0, -112), moltoSpline(0)), Stale(brassKeyword(1, 23), moltoSpline(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no Pointed, no concaveAlternator].\nA solution exists for these constraints:\n\nconcaveAlternator -> [c is brassKeyword, c.utilization <= 22]\nPointed -> [p is moltoSpline, s = sum(0.0, { c.utilization | c is brassKeyword, Stale(c, p) }), s > -89]\n"
+    },
+    {
+        "instruction": "The following model is solvable. Why?",
+        "input": "domain Plain { exhaustiveTennis ::= new (id: Integer, utilization: Real). ironWave ::= new (id: Integer). Plain ::= new (c: exhaustiveTennis, p: ironWave). toughCherry :- c is exhaustiveTennis, c.utilization < 80. niceSalsa :- p is ironWave, s = sum(0.0, { c.utilization | c is exhaustiveTennis, Plain(c, p) }), s <= -23. conforms no niceSalsa, no toughCherry. } partial model roundLimestone of Plain { c1 is exhaustiveTennis(0, x). c2 is exhaustiveTennis(1, y). p1 is ironWave(0). Plain(c1, p1). Plain(c2, p1). }, ironWave(0), exhaustiveTennis(0, 80), exhaustiveTennis(1, 0), Plain(exhaustiveTennis(0, 80), ironWave(0)), Plain(exhaustiveTennis(1, 0), ironWave(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no niceSalsa, no toughCherry].\nA solution exists for these constraints:\n\ntoughCherry -> [c is exhaustiveTennis, c.utilization < 80]\nniceSalsa -> [p is ironWave, s = sum(0.0, { c.utilization | c is exhaustiveTennis, Plain(c, p) }), s <= -23]\n"
+    },
+    {
+        "instruction": "Solve the following model.",
+        "input": "domain Shrewd { futureGong ::= new (id: Integer, utilization: Real). Composite ::= new (id: Integer). Shrewd ::= new (c: futureGong, p: Composite). Nullary :- c is futureGong, c.utilization <= -78. freeTriangle :- p is Composite, s = sum(0.0, { c.utilization | c is futureGong, Shrewd(c, p) }), s < 0. conforms no freeTriangle, no Nullary. } partial model Arctic of Shrewd { c1 is futureGong(0, x). c2 is futureGong(1, y). p1 is Composite(0). Shrewd(c1, p1). Shrewd(c2, p1). }, Composite(0), futureGong(0, 0), futureGong(1, 0), Shrewd(futureGong(0, 0), Composite(0)), Shrewd(futureGong(1, 0), Composite(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no freeTriangle, no Nullary].\nA solution exists for these constraints:\n\nNullary -> [c is futureGong, c.utilization <= -78]\nfreeTriangle -> [p is Composite, s = sum(0.0, { c.utilization | c is futureGong, Shrewd(c, p) }), s < 0]\n"
+    },
+    {
+        "instruction": "Conclude why this is solvable.",
+        "input": "domain Formal { parallelRiver ::= new (id: Integer, utilization: Real). Energetic ::= new (id: Integer). Formal ::= new (c: parallelRiver, p: Energetic). cloudyDiffusion :- c is parallelRiver, c.utilization > 8. Grim :- p is Energetic, s = sum(0.0, { c.utilization | c is parallelRiver, Formal(c, p) }), s < 72. conforms no Grim, no cloudyDiffusion. } partial model spicyPolytope of Formal { c1 is parallelRiver(0, x). c2 is parallelRiver(1, y). p1 is Energetic(0). Formal(c1, p1). Formal(c2, p1). }, Energetic(0), parallelRiver(0, 0), parallelRiver(1, 72), Formal(parallelRiver(0, 0), Energetic(0)), Formal(parallelRiver(1, 72), Energetic(0))",
+        "output": "This model is solvable because of the conformity of the following rules [no Grim, no cloudyDiffusion].\nA solution exists for these constraints:\n\ncloudyDiffusion -> [c is parallelRiver, c.utilization > 8]\nGrim -> [p is Energetic, s = sum(0.0, { c.utilization | c is parallelRiver, Formal(c, p) }), s < 72]\n"
     }
 ]
