@@ -77,7 +77,7 @@ def generate_domain(file_txt):
     (dom_sentence (body_list (body (constraint (func_term (atom (id) @rule_name))))))
     (rule (func_term_list (func_or_compr (func_term (id) @rule_name))))
     (rule (body_list (body (constraint (func_term (id) @rule_name)))))
-    (rule (body_list (body (constraint (func_term (atom (id) @rule_name)) .))))
+    (rule (body_list (body (constraint (func_term (atom (id (bareid)) @rule_name))))))
     """)
     tree = FORMULA_PARSER.parse(bytes(file_txt, 'utf8'), keep_text=True)
     negList = ["sum","max","count","maxAll","minAll","min","or","orAll","and","andAll", "Boolean", "Integer"]
@@ -146,7 +146,7 @@ def generate_solution():
         finally:
             file.close()
 
-        for idx in range(10):
+        for idx in range(1000):
             file_txt = ""
             if not ci.DoCommand("unload *"):
                 raise Exception("Unload command failed.")
@@ -184,10 +184,10 @@ def generate_solution():
             solve_cmd = "solve " + partial_model + " 1 " + domain + ".conforms"
 
             rule_query = FORMULA_LANGUAGE.query('''
-            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name "''' + domain + '''"))) 
-            (dom_sentences (dom_sentence_config (dom_sentence (rule) @rule))))
-            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name "''' + domain + '''"))) 
-            (dom_sentences (dom_sentence_config (dom_sentence (body_list) @conforms))))
+            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name ''' + domain + ''')))) 
+            (dom_sentences (dom_sentence_config (dom_sentence (rule) @rule)))
+            (domain (domain_sig_config (domain_sig (bareid) @dom_name (#eq? @dom_name ''' + domain + '''))))
+            (dom_sentences (dom_sentence_config (dom_sentence (body_list) @conforms)))
             ''')
 
             cap = rule_query.captures(tree.root_node)
@@ -197,7 +197,7 @@ def generate_solution():
                 n, t = node
                 if t == 'rule':
                     rule = n.text.decode()
-                    match = re.search(r'(.+):-\s*(.*)', rule, re.DOTALL)
+                    match = re.search(r'(.+):-\s*(.*)\.', rule, re.DOTALL)
                     rules[match.group(1).strip()] = match.group(2).strip()
                 elif t == 'conforms':
                     forms = n.text.decode()
